@@ -1,12 +1,13 @@
 <idea-plugin version="2">
-  <id>com.yourcompany.unique.plugin.id</id>
-  <name>Plugin display name here</name>
+  <id>com.atsplugin</id>
+  <name>IntelliJATS</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="brandon.barker@cornell.edu" url="http://www.cac.cornell.edu/">Cornell Center for Advanced Computing</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      This is an IntelliJ plugin for the Applied Type System
+      <a href="http://www.ats-lang.org/">(ATS) Language</a>.
+      <!--<em>most HTML tags may be used</em>-->
     ]]></description>
 
   <change-notes><![CDATA[
@@ -25,7 +26,7 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+    <fileTypeFactory implementation="com.atslangplugin.ATSFileTypeFactory"/>
   </extensions>
 
   <application-components>
