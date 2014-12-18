@@ -1,0 +1,20 @@
+{
+  parserClass="com.atslangplugin.parser.ATSParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="ATS"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.atslangplugin.psi"
+  psiImplPackage="com.atslangplugin.psi.impl"
+
+  elementTypeHolderClass="com.atslangplugin.psi.ATSTypes"
+  elementTypeClass="com.atslangplugin.psi.ATSElementType"
+  tokenTypeClass="com.atslangplugin.psi.ATSTokenType"
+}
+
+ATSFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY
