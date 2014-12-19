@@ -57,39 +57,64 @@ DEC_INT_LITERAL = 0 | [1-9][0-9]* // CHECK_ME
 //
 <YYINITIAL> "\\"        { return symbol(sym.BACKSLASH); }
 <YYINITIAL> "!"         { return symbol(sym.BANG); }
-<YYINITIAL> "`"         { return symbol.BQUOTE); }
+<YYINITIAL> "`"         { return symbol(sym.BQUOTE); }
 //
-<YYINITIAL> ":"         { return symbol.COLON); }
-<YYINITIAL> ":<"        { return symbol.COLONLT); }
+<YYINITIAL> ":"         { return symbol(sym.COLON); }
+<YYINITIAL> ":<"        { return symbol(sym.COLONLT); }
 /*
   | T_COLONLTGT of () // :<> // HX: impossible
 */
 //
-<YYINITIAL> "$"                         { return symbol.DOLLAR); }
+<YYINITIAL> "$"                         { return symbol(sym.DOLLAR); }
 //
-<YYINITIAL> "."                         { return symbol.DOT); }
-<YYINITIAL> ".."                        { return symbol.DOTDOT); }
-<YYINITIAL> "..."                       { return symbol.DOTDOTDOT); }
+<YYINITIAL> "."                         { return symbol(sym.DOT); }
+<YYINITIAL> ".."                        { return symbol(sym.DOTDOT); }
+<YYINITIAL> "..."                       { return symbol(sym.DOTDOTDOT); }
 //
-<YYINITIAL> "."{DEC_INT_LITERAL}        { return symbol.DOTINT); }
+<YYINITIAL> "."{DEC_INT_LITERAL}        { return symbol(sym.DOTINT); }
 //
-<YYINITIAL> "="                         { return symbol.EQ); }
-<YYINITIAL> "=>"                        { return symbol.EQGT); }
-<YYINITIAL> "=<"                        { return symbol.EQLT); }
-<YYINITIAL> "=<>"                       { return symbol.EQLTGT); }
-<YYINITIAL> "=/=>"                      { return symbol.EQSLASHEQGT); }
-<YYINITIAL> "=>>"                       { return symbol.EQGTGT); }
-<YYINITIAL> "=/=>>"                     { return symbol.EQSLASHEQGTGT); }
+<YYINITIAL> "="                         { return symbol(sym.EQ); }
+<YYINITIAL> "=>"                        { return symbol(sym.EQGT); }
+<YYINITIAL> "=<"                        { return symbol(sym.EQLT); }
+<YYINITIAL> "=<>"                       { return symbol(sym.EQLTGT); }
+<YYINITIAL> "=/=>"                      { return symbol(sym.EQSLASHEQGT); }
+<YYINITIAL> "=>>"                       { return symbol(sym.EQGTGT); }
+<YYINITIAL> "=/=>>"                     { return symbol(sym.EQSLASHEQGTGT); }
 //
-<YYINITIAL> "#"                         { return symbol.HASH); }
+<YYINITIAL> "#"                         { return symbol(sym.HASH); }
 //
-<YYINITIAL> "<"                         { return symbol.LT); } // for opening a tmparg
-<YYINITIAL> ">"                         { return symbol.GT); } // for closing a tmparg
+<YYINITIAL> "<"                         { return symbol(sym.LT); } // for opening a tmparg
+<YYINITIAL> ">"                         { return symbol(sym.GT); } // for closing a tmparg
 //
-<YYINITIAL> "<>"                        { return symbol.GTLT); }
-<YYINITIAL> ".<"                        { return symbol.DOTLT); } // opening termetric
-<YYINITIAL> ">."                        { return symbol.GTDOT); } // closing termetric
-<YYINITIAL> ".<>."                         { return symbol.DOTLTGTDOT); } // empty termetric
+<YYINITIAL> "<>"                        { return symbol(sym.GTLT); }
+<YYINITIAL> ".<"                        { return symbol(sym.DOTLT); } // opening termetric
+<YYINITIAL> ">."                        { return symbol(sym.GTDOT); } // closing termetric
+<YYINITIAL> ".<>."                      { return symbol(sym.DOTLTGTDOT); } // empty termetric
+//
+<YYINITIAL> "->"                        { return symbol(sym.MINUSGT); }
+<YYINITIAL> "-<"                        { return symbol(sym.MINUSLT); }
+<YYINITIAL> "-<>"                       { return symbol(sym.MINUSLTGT); }
+//
+<YYINITIAL> "~"                         { return symbol(sym.TILDE); }
+//
+<YYINITIAL> "absview"|"absviewtype"|"absviewt@ype"  { return symbol(sym.ABSTYPE); }
+//
+<YYINITIAL> "and"                        { return symbol(sym.AND); }
+<YYINITIAL> "as"                         { return symbol(sym.AND); }
+<YYINITIAL> "assume"                     { return symbol(sym.ASSUME); }
+<YYINITIAL> "begin"                      { return symbol(sym.BEGIN); }
+<YYINITIAL> "begin"                      { return symbol(sym.BEGIN); }
+<YYINITIAL> "case"|"case-"|"case+"|"prcase" { return symbol(sym.CASE); }
+<YYINITIAL> "classdec"                   { return symbol(sym.CLASSDEC); }
+<YYINITIAL> "datasort"                   { return symbol(sym.DATASORT); }
+// BB: surprising to me these all generate the same token:
+<YYINITIAL> "datatype"|"dataprop"|"dataview"|"dataviewtype"
+                                         { return symbol(sym.DATATYPE); }
+<YYINITIAL> "do"                         { return symbol(sym.DO); }
+<YYINITIAL> "dynload"                    { return symbol(sym.DYNLOAD); }
+<YYINITIAL> "else"                       { return symbol(sym.ELSE); }
+<YYINITIAL> "end"                        { return symbol(sym.END); }
+<YYINITIAL> "exception"                  { return symbol(sym.EXCEPTION); }
 //
 
 
