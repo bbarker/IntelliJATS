@@ -1,5 +1,5 @@
 <idea-plugin version="2">
-  <id>com.atsplugin</id>
+  <id>com.atslangplugin</id>
   <name>IntelliJATS</name>
   <version>1.0</version>
   <vendor email="brandon.barker@cornell.edu" url="http://www.cac.cornell.edu/">Cornell Center for Advanced Computing</vendor>
