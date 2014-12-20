@@ -55,233 +55,233 @@ HEX_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
 
 /*  *** *** keywords and symbols  *** ***  */
 
-<YYINITIAL> ""          { return symbol(sym.NONE); } // CHECK_ME
+<YYINITIAL> ""          { return ATSTypes.NONE; } // CHECK_ME
 //
-<YYINITIAL> "@"         { return symbol(sym.AT); }
+<YYINITIAL> "@"         { return ATSTypes.AT; }
 //
-<YYINITIAL> "\\"        { return symbol(sym.BACKSLASH); }
-<YYINITIAL> "!"         { return symbol(sym.BANG); }
-<YYINITIAL> "`"         { return symbol(sym.BQUOTE); }
+<YYINITIAL> "\\"        { return ATSTypes.BACKSLASH; }
+<YYINITIAL> "!"         { return ATSTypes.BANG; }
+<YYINITIAL> "`"         { return ATSTypes.BQUOTE; }
 //
-<YYINITIAL> ":"         { return symbol(sym.COLON); }
-<YYINITIAL> ":<"        { return symbol(sym.COLONLT); }
+<YYINITIAL> ":"         { return ATSTypes.COLON; }
+<YYINITIAL> ":<"        { return ATSTypes.COLONLT; }
 /*
   | T_COLONLTGT of () // :<> // HX: impossible
 */
 //
-<YYINITIAL> "$"                         { return symbol(sym.DOLLAR); }
+<YYINITIAL> "$"                         { return ATSTypes.DOLLAR; }
 //
-<YYINITIAL> "."                         { return symbol(sym.DOT); }
-<YYINITIAL> ".."                        { return symbol(sym.DOTDOT); }
-<YYINITIAL> "..."                       { return symbol(sym.DOTDOTDOT); }
+<YYINITIAL> "."                         { return ATSTypes.DOT; }
+<YYINITIAL> ".."                        { return ATSTypes.DOTDOT; }
+<YYINITIAL> "..."                       { return ATSTypes.DOTDOTDOT; }
 //
-<YYINITIAL> "."{DEC_INT_LITERAL}        { return symbol(sym.DOTINT); }
+<YYINITIAL> "."{DEC_INT_LITERAL}        { return ATSTypes.DOTINT; }
 //
-<YYINITIAL> "="                         { return symbol(sym.EQ); }
-<YYINITIAL> "=>"                        { return symbol(sym.EQGT); }
-<YYINITIAL> "=<"                        { return symbol(sym.EQLT); }
-<YYINITIAL> "=<>"                       { return symbol(sym.EQLTGT); }
-<YYINITIAL> "=/=>"                      { return symbol(sym.EQSLASHEQGT); }
-<YYINITIAL> "=>>"                       { return symbol(sym.EQGTGT); }
-<YYINITIAL> "=/=>>"                     { return symbol(sym.EQSLASHEQGTGT); }
+<YYINITIAL> "="                         { return ATSTypes.EQ; }
+<YYINITIAL> "=>"                        { return ATSTypes.EQGT; }
+<YYINITIAL> "=<"                        { return ATSTypes.EQLT; }
+<YYINITIAL> "=<>"                       { return ATSTypes.EQLTGT; }
+<YYINITIAL> "=/=>"                      { return ATSTypes.EQSLASHEQGT; }
+<YYINITIAL> "=>>"                       { return ATSTypes.EQGTGT; }
+<YYINITIAL> "=/=>>"                     { return ATSTypes.EQSLASHEQGTGT; }
 //
-<YYINITIAL> "#"                         { return symbol(sym.HASH); }
+<YYINITIAL> "#"                         { return ATSTypes.HASH; }
 //
-<YYINITIAL> "<"                         { return symbol(sym.LT); } // for opening a tmparg
-<YYINITIAL> ">"                         { return symbol(sym.GT); } // for closing a tmparg
+<YYINITIAL> "<"                         { return ATSTypes.LT; } // for opening a tmparg
+<YYINITIAL> ">"                         { return ATSTypes.GT; } // for closing a tmparg
 //
-<YYINITIAL> "<>"                        { return symbol(sym.GTLT); }
-<YYINITIAL> ".<"                        { return symbol(sym.DOTLT); } // opening termetric
-<YYINITIAL> ">."                        { return symbol(sym.GTDOT); } // closing termetric
-<YYINITIAL> ".<>."                      { return symbol(sym.DOTLTGTDOT); } // empty termetric
+<YYINITIAL> "<>"                        { return ATSTypes.GTLT; }
+<YYINITIAL> ".<"                        { return ATSTypes.DOTLT; } // opening termetric
+<YYINITIAL> ">."                        { return ATSTypes.GTDOT; } // closing termetric
+<YYINITIAL> ".<>."                      { return ATSTypes.DOTLTGTDOT; } // empty termetric
 //
-<YYINITIAL> "->"                        { return symbol(sym.MINUSGT); }
-<YYINITIAL> "-<"                        { return symbol(sym.MINUSLT); }
-<YYINITIAL> "-<>"                       { return symbol(sym.MINUSLTGT); }
+<YYINITIAL> "->"                        { return ATSTypes.MINUSGT; }
+<YYINITIAL> "-<"                        { return ATSTypes.MINUSLT; }
+<YYINITIAL> "-<>"                       { return ATSTypes.MINUSLTGT; }
 //
-<YYINITIAL> "~"                         { return symbol(sym.TILDE); }
+<YYINITIAL> "~"                         { return ATSTypes.TILDE; }
 //
 <YYINITIAL> "abstype"|"abst0ype"|"absprop"|"absview"|
             "absviewtype"|"absvtype"|"absviewt@ype"|"absvt0ype"|"absviewt0ype"
-                                        { return symbol(sym.ABSTYPE); }
+                                        { return ATSTypes.ABSTYPE; }
 //
-<YYINITIAL> "and"                       { return symbol(sym.AND); }
-<YYINITIAL> "as"                        { return symbol(sym.AS); }
-<YYINITIAL> "assume"                    { return symbol(sym.ASSUME); }
-<YYINITIAL> "begin"                     { return symbol(sym.BEGIN); }
-<YYINITIAL> "begin"                     { return symbol(sym.BEGIN); }
+<YYINITIAL> "and"                       { return ATSTypes.AND; }
+<YYINITIAL> "as"                        { return ATSTypes.AS; }
+<YYINITIAL> "assume"                    { return ATSTypes.ASSUME; }
+<YYINITIAL> "begin"                     { return ATSTypes.BEGIN; }
+<YYINITIAL> "begin"                     { return ATSTypes.BEGIN; }
 <YYINITIAL> "case"|"case-"|"case+"|"prcase"
-                                        { return symbol(sym.CASE); }
-<YYINITIAL> "classdec"                  { return symbol(sym.CLASSDEC); }
-<YYINITIAL> "datasort"                  { return symbol(sym.DATASORT); }
+                                        { return ATSTypes.CASE; }
+<YYINITIAL> "classdec"                  { return ATSTypes.CLASSDEC; }
+<YYINITIAL> "datasort"                  { return ATSTypes.DATASORT; }
 // BB: surprising to me these all generate the same token:
 // (but maybe not exactly, see ./src/pats_lexing_token.dats)
 <YYINITIAL> "datatype"|"dataprop"|"dataview"|"dataviewtype"|"datavtype"
-                                        { return symbol(sym.DATATYPE); }
-<YYINITIAL> "do"                        { return symbol(sym.DO); }
-<YYINITIAL> "dynload"                   { return symbol(sym.DYNLOAD); }
-<YYINITIAL> "else"                      { return symbol(sym.ELSE); }
-<YYINITIAL> "end"                       { return symbol(sym.END); }
-<YYINITIAL> "exception"                 { return symbol(sym.EXCEPTION); }
+                                        { return ATSTypes.DATATYPE; }
+<YYINITIAL> "do"                        { return ATSTypes.DO; }
+<YYINITIAL> "dynload"                   { return ATSTypes.DYNLOAD; }
+<YYINITIAL> "else"                      { return ATSTypes.ELSE; }
+<YYINITIAL> "end"                       { return ATSTypes.END; }
+<YYINITIAL> "exception"                 { return ATSTypes.EXCEPTION; }
 //
-<YYINITIAL> "extern"                    { return symbol(sym.EXTERN); }
-<YYINITIAL> "extype"                    { return symbol(sym.EXTYPE); }
-<YYINITIAL> "extvar"                    { return symbol(sym.EXTVAR); }
+<YYINITIAL> "extern"                    { return ATSTypes.EXTERN; }
+<YYINITIAL> "extype"                    { return ATSTypes.EXTYPE; }
+<YYINITIAL> "extvar"                    { return ATSTypes.EXTVAR; }
 //
-<YYINITIAL> "fix"|"fix@"                { return symbol(sym.FIX); }
+<YYINITIAL> "fix"|"fix@"                { return ATSTypes.FIX; }
 <YYINITIAL> "infix"|"infixl"|"infixr"|"prefix"|"postfix"
-                                        { return symbol(sym.FIXITY); }
-<YYINITIAL> "for*"                      { return symbol(sym.FORSTAR); }
+                                        { return ATSTypes.FIXITY; }
+<YYINITIAL> "for*"                      { return ATSTypes.FORSTAR; }
 <YYINITIAL> "fn"|"fnx"|"fun"|"prfn"|"prfun"|"praxi"|"castfn"
-                                        { return symbol(sym.FUN); }
-<YYINITIAL> "if"                        { return symbol(sym.IF); } // dynamic
-<YYINITIAL> "implement"|"primplement"   { return symbol(sym.IMPLEMENT); }
-<YYINITIAL> "import"                    { return symbol(sym.IMPORT); }
-<YYINITIAL> "in"                        { return symbol(sym.IN); }
-<YYINITIAL> "lam"|"llam"|"lam@"         { return symbol(sym.LAM); }
-<YYINITIAL> "let"                       { return symbol(sym.LET); }
-<YYINITIAL> "local"                     { return symbol(sym.LOCAL); }
-<YYINITIAL> "macdef"|"macrodef"         { return symbol(sym.MACDEF); }
-<YYINITIAL> "nonfix"                    { return symbol(sym.NONFIX); }
-<YYINITIAL> "overload"                  { return symbol(sym.OVERLOAD); }
-<YYINITIAL> "of"                        { return symbol(sym.OF); }
-<YYINITIAL> "op"                        { return symbol(sym.OP); }
-<YYINITIAL> "rec"                       { return symbol(sym.REC); }
-<YYINITIAL> "ref@"                      { return symbol(sym.REFAT); }
-<YYINITIAL> "require"                   { return symbol(sym.REQUIRE); }
-<YYINITIAL> "scase"                     { return symbol(sym.SCASE); }
-<YYINITIAL> "sif"                       { return symbol(sym.SIF); } // static
-<YYINITIAL> "sortdef"                   { return symbol(sym.SORTDEF); }
-<YYINITIAL> "stacst"                    { return symbol(sym.STACST); }
-<YYINITIAL> "stadef"                    { return symbol(sym.STADEF); }
-<YYINITIAL> "staload"                   { return symbol(sym.STALOAD); }
-<YYINITIAL> "static"                    { return symbol(sym.STATIC); }
+                                        { return ATSTypes.FUN; }
+<YYINITIAL> "if"                        { return ATSTypes.IF; } // dynamic
+<YYINITIAL> "implement"|"primplement"   { return ATSTypes.IMPLEMENT; }
+<YYINITIAL> "import"                    { return ATSTypes.IMPORT; }
+<YYINITIAL> "in"                        { return ATSTypes.IN; }
+<YYINITIAL> "lam"|"llam"|"lam@"         { return ATSTypes.LAM; }
+<YYINITIAL> "let"                       { return ATSTypes.LET; }
+<YYINITIAL> "local"                     { return ATSTypes.LOCAL; }
+<YYINITIAL> "macdef"|"macrodef"         { return ATSTypes.MACDEF; }
+<YYINITIAL> "nonfix"                    { return ATSTypes.NONFIX; }
+<YYINITIAL> "overload"                  { return ATSTypes.OVERLOAD; }
+<YYINITIAL> "of"                        { return ATSTypes.OF; }
+<YYINITIAL> "op"                        { return ATSTypes.OP; }
+<YYINITIAL> "rec"                       { return ATSTypes.REC; }
+<YYINITIAL> "ref@"                      { return ATSTypes.REFAT; }
+<YYINITIAL> "require"                   { return ATSTypes.REQUIRE; }
+<YYINITIAL> "scase"                     { return ATSTypes.SCASE; }
+<YYINITIAL> "sif"                       { return ATSTypes.SIF; } // static
+<YYINITIAL> "sortdef"                   { return ATSTypes.SORTDEF; }
+<YYINITIAL> "stacst"                    { return ATSTypes.STACST; }
+<YYINITIAL> "stadef"                    { return ATSTypes.STADEF; }
+<YYINITIAL> "staload"                   { return ATSTypes.STALOAD; }
+<YYINITIAL> "static"                    { return ATSTypes.STATIC; }
 /*
   | T_STAVAR of () // stavar // HX: a suspended hack
 */
-<YYINITIAL> "symelim"                   { return symbol(sym.SYMELIM); }
-<YYINITIAL> "symintr"                   { return symbol(sym.SYMINTR); }
-<YYINITIAL> "then"                      { return symbol(sym.THEN); }
-<YYINITIAL> "tkindef"                   { return symbol(sym.TKINDEF); }
-<YYINITIAL> "try"                       { return symbol(sym.TRY); }
-<YYINITIAL> "type"|"type+"|"type-"      { return symbol(sym.TYPE); }
+<YYINITIAL> "symelim"                   { return ATSTypes.SYMELIM; }
+<YYINITIAL> "symintr"                   { return ATSTypes.SYMINTR; }
+<YYINITIAL> "then"                      { return ATSTypes.THEN; }
+<YYINITIAL> "tkindef"                   { return ATSTypes.TKINDEF; }
+<YYINITIAL> "try"                       { return ATSTypes.TRY; }
+<YYINITIAL> "type"|"type+"|"type-"      { return ATSTypes.TYPE; }
 <YYINITIAL> "typedef"|"propdef"|"viewdef"|"viewtypedef" // CHECK_ME: aliases?
-                                        { return symbol(sym.TYPEDEF); }
-<YYINITIAL> "val"|"val+"|"val-"|"prval" { return symbol(sym.VAL); }
-<YYINITIAL> "var"|"prvar"               { return symbol(sym.VAR); }
-<YYINITIAL> "when"                      { return symbol(sym.WHEN); }
-<YYINITIAL> "where"                     { return symbol(sym.WHERE); }
-<YYINITIAL> "while"                     { return symbol(sym.WHILE); }
-<YYINITIAL> "while*"                    { return symbol(sym.WHILESTAR); }
-<YYINITIAL> "with"                      { return symbol(sym.WITH); }
+                                        { return ATSTypes.TYPEDEF; }
+<YYINITIAL> "val"|"val+"|"val-"|"prval" { return ATSTypes.VAL; }
+<YYINITIAL> "var"|"prvar"               { return ATSTypes.VAR; }
+<YYINITIAL> "when"                      { return ATSTypes.WHEN; }
+<YYINITIAL> "where"                     { return ATSTypes.WHERE; }
+<YYINITIAL> "while"                     { return ATSTypes.WHILE; }
+<YYINITIAL> "while*"                    { return ATSTypes.WHILESTAR; }
+<YYINITIAL> "with"                      { return ATSTypes.WITH; }
 <YYINITIAL> "withtype"|"withprop"|"withview"|"withviewtype"
-                                        { return symbol(sym.WITHTYPE); }
+                                        { return ATSTypes.WITHTYPE; }
 //
-<YYINITIAL> "addr@"                     { return symbol(sym.ADDRAT); }
-<YYINITIAL> "fold@"                     { return symbol(sym.FOLDAT); }
-<YYINITIAL> "free@"                     { return symbol(sym.FREEAT); }
-<YYINITIAL> "view@"                     { return symbol(sym.VIEWAT); }
+<YYINITIAL> "addr@"                     { return ATSTypes.ADDRAT; }
+<YYINITIAL> "fold@"                     { return ATSTypes.FOLDAT; }
+<YYINITIAL> "free@"                     { return ATSTypes.FREEAT; }
+<YYINITIAL> "view@"                     { return ATSTypes.VIEWAT; }
 //
-<YYINITIAL> "$arrpsz"|"$arrptrsize"     { return symbol(sym.DLRARRPSZ); }
+<YYINITIAL> "$arrpsz"|"$arrptrsize"     { return ATSTypes.DLRARRPSZ; }
 //
-<YYINITIAL> "$delay"|"$ldelay"          { return symbol(sym.DLRDELAY); }
+<YYINITIAL> "$delay"|"$ldelay"          { return ATSTypes.DLRDELAY; }
 //
-<YYINITIAL> "$effmask"                  { return symbol(sym.DLREFFMASK); }
+<YYINITIAL> "$effmask"                  { return ATSTypes.DLREFFMASK; }
 <YYINITIAL> "ntm"|"exn"|"ref"|"wrt"|"all"
-                                        { return symbol(sym.DLREFFMASK_ARG); }
-<YYINITIAL> "$extern"                   { return symbol(sym.DLREXTERN); }
-<YYINITIAL> "$extkind"                  { return symbol(sym.DLREXTKIND); }
-<YYINITIAL> "$extype"                   { return symbol(sym.DLREXTYPE); }
-<YYINITIAL> "$extype_struct"            { return symbol(sym.DLREXTYPE_STRUCT); }
+                                        { return ATSTypes.DLREFFMASK_ARG; }
+<YYINITIAL> "$extern"                   { return ATSTypes.DLREXTERN; }
+<YYINITIAL> "$extkind"                  { return ATSTypes.DLREXTKIND; }
+<YYINITIAL> "$extype"                   { return ATSTypes.DLREXTYPE; }
+<YYINITIAL> "$extype_struct"            { return ATSTypes.DLREXTYPE_STRUCT; }
 //
-<YYINITIAL> "$extval"                   { return symbol(sym.DLREXTVAL); }
-<YYINITIAL> "$extfcall"                 { return symbol(sym.DLREXTFCALL); }
-<YYINITIAL> "$extmcall"                 { return symbol(sym.DLREXTMCALL); }
+<YYINITIAL> "$extval"                   { return ATSTypes.DLREXTVAL; }
+<YYINITIAL> "$extfcall"                 { return ATSTypes.DLREXTFCALL; }
+<YYINITIAL> "$extmcall"                 { return ATSTypes.DLREXTMCALL; }
 //
-<YYINITIAL> "$break"                    { return symbol(sym.DLRBREAK); }
-<YYINITIAL> "$continue"                 { return symbol(sym.DLRCONTINUE); }
-<YYINITIAL> "$raise"                    { return symbol(sym.DLRRAISE); }
+<YYINITIAL> "$break"                    { return ATSTypes.DLRBREAK; }
+<YYINITIAL> "$continue"                 { return ATSTypes.DLRCONTINUE; }
+<YYINITIAL> "$raise"                    { return ATSTypes.DLRRAISE; }
 //
 <YYINITIAL> "$lst"|"$list"|"$lst_t"|"$list_t"|"$lst_vt"|"$list_vt"
-                                        { return symbol(sym.DLRLST); }
+                                        { return ATSTypes.DLRLST; }
 <YYINITIAL> "$rec"|"$record"|"$rec_t"|"$record_t"|"$rec_vt"|"$record_vt"
-                                        { return symbol(sym.DLRREC); }
+                                        { return ATSTypes.DLRREC; }
 <YYINITIAL> "$tup"|"$tup_t"|"$tup_vt"|"$tuple"|"$tuple_t"|"$tuple_vt"
-                                        { return symbol(sym.DLRTUP); }
+                                        { return ATSTypes.DLRTUP; }
 //
-<YYINITIAL> "$myfilename"               { return symbol(sym.DLRMYFILENAME); }
-<YYINITIAL> "$mylocation"               { return symbol(sym.DLRMYLOCATION); }
-<YYINITIAL> "$myfunction"               { return symbol(sym.DLRMYFUNCTION); }
+<YYINITIAL> "$myfilename"               { return ATSTypes.DLRMYFILENAME; }
+<YYINITIAL> "$mylocation"               { return ATSTypes.DLRMYLOCATION; }
+<YYINITIAL> "$myfunction"               { return ATSTypes.DLRMYFUNCTION; }
 //
-<YYINITIAL> "$showtype"                 { return symbol(sym.DLRSHOWTYPE); }
+<YYINITIAL> "$showtype"                 { return ATSTypes.DLRSHOWTYPE; }
 //
 <YYINITIAL> "$vcopyenv_v"|"$vcopyenv_vt(vt)"
-                                        { return symbol(sym.DLRVCOPYENV); }
+                                        { return ATSTypes.DLRVCOPYENV; }
 //
-<YYINITIAL> "#assert"                   { return symbol(sym.SRPASSERT); }
-<YYINITIAL> "#define"                   { return symbol(sym.SRPDEFINE); }
-<YYINITIAL> "#elif"                     { return symbol(sym.SRPELIF); }
-<YYINITIAL> "#elifdef"                  { return symbol(sym.SRPELIFDEF); }
-<YYINITIAL> "#elifndef"                 { return symbol(sym.SRPELIFNDEF); }
-<YYINITIAL> "#else"                     { return symbol(sym.SRPELSE); }
-<YYINITIAL> "#endif"                    { return symbol(sym.SRPENDIF); }
-<YYINITIAL> "#error"                    { return symbol(sym.SRPERROR); }
-<YYINITIAL> "#if"                       { return symbol(sym.SRPIF); }
-<YYINITIAL> "#ifdef"                    { return symbol(sym.SRPIFDEF); }
-<YYINITIAL> "#ifndef"                   { return symbol(sym.SRPIFNDEF); }
-<YYINITIAL> "#include"                  { return symbol(sym.SRPINCLUDE); }
-<YYINITIAL> "#print"                    { return symbol(sym.SRPPRINT); }
-<YYINITIAL> "#then"                     { return symbol(sym.SRPTHEN); }
-<YYINITIAL> "#undef"                    { return symbol(sym.SRPUNDEF); }
+<YYINITIAL> "#assert"                   { return ATSTypes.SRPASSERT; }
+<YYINITIAL> "#define"                   { return ATSTypes.SRPDEFINE; }
+<YYINITIAL> "#elif"                     { return ATSTypes.SRPELIF; }
+<YYINITIAL> "#elifdef"                  { return ATSTypes.SRPELIFDEF; }
+<YYINITIAL> "#elifndef"                 { return ATSTypes.SRPELIFNDEF; }
+<YYINITIAL> "#else"                     { return ATSTypes.SRPELSE; }
+<YYINITIAL> "#endif"                    { return ATSTypes.SRPENDIF; }
+<YYINITIAL> "#error"                    { return ATSTypes.SRPERROR; }
+<YYINITIAL> "#if"                       { return ATSTypes.SRPIF; }
+<YYINITIAL> "#ifdef"                    { return ATSTypes.SRPIFDEF; }
+<YYINITIAL> "#ifndef"                   { return ATSTypes.SRPIFNDEF; }
+<YYINITIAL> "#include"                  { return ATSTypes.SRPINCLUDE; }
+<YYINITIAL> "#print"                    { return ATSTypes.SRPPRINT; }
+<YYINITIAL> "#then"                     { return ATSTypes.SRPTHEN; }
+<YYINITIAL> "#undef"                    { return ATSTypes.SRPUNDEF; }
 //
 // The internal lexing of views + types seems to be a bit complicated
 // For now I try to simplify it a bit; currently not handled: (FIX_ME)
 // T_IDENT_alp
 //
-<YYINITIAL> ""                          { return symbol(sym.INT); }  // FIX_ME
-<YYINITIAL> ""                          { return symbol(sym.CHAR); }  // FIX_ME
-<YYINITIAL> ""                          { return symbol(sym.FLOAT); }  // FIX_ME
-<YYINITIAL> ""                          { return symbol(sym.CDATA); }  // FIX_ME
-<YYINITIAL> ""                          { return symbol(sym.STRING); }  // FIX_ME
+<YYINITIAL> ""                          { return ATSTypes.INT; }  // FIX_ME
+<YYINITIAL> ""                          { return ATSTypes.CHAR; }  // FIX_ME
+<YYINITIAL> ""                          { return ATSTypes.FLOAT; }  // FIX_ME
+<YYINITIAL> ""                          { return ATSTypes.CDATA; }  // FIX_ME
+<YYINITIAL> ""                          { return ATSTypes.STRING; }  // FIX_ME
 //
 /*
   | T_LABEL of (int(*knd*), string) // HX-2013-01: should it be supported?
 */
 //
-<YYINITIAL> ","                         { return symbol(sym.COMMA); }
-<YYINITIAL> ";"                         { return symbol(sym.SEMICOLON); }
+<YYINITIAL> ","                         { return ATSTypes.COMMA; }
+<YYINITIAL> ";"                         { return ATSTypes.SEMICOLON; }
 //
-<YYINITIAL> "("                         { return symbol(sym.LPAREN); }
-<YYINITIAL> ")"                         { return symbol(sym.RPAREN); }
-<YYINITIAL> "["                         { return symbol(sym.LBRACKET); }
-<YYINITIAL> "]"                         { return symbol(sym.RBRACKET); }
-<YYINITIAL> "{"                         { return symbol(sym.LBRACE); }
-<YYINITIAL> "}"                         { return symbol(sym.RBRACE); }
+<YYINITIAL> "("                         { return ATSTypes.LPAREN; }
+<YYINITIAL> ")"                         { return ATSTypes.RPAREN; }
+<YYINITIAL> "["                         { return ATSTypes.LBRACKET; }
+<YYINITIAL> "]"                         { return ATSTypes.RBRACKET; }
+<YYINITIAL> "{"                         { return ATSTypes.LBRACE; }
+<YYINITIAL> "}"                         { return ATSTypes.RBRACE; }
 //
-<YYINITIAL> "@("                        { return symbol(sym.ATLPAREN); }
-<YYINITIAL> "'("                        { return symbol(sym.QUOTELPAREN); }
-<YYINITIAL> "@["                        { return symbol(sym.ATLBRACKET); }
-<YYINITIAL> "'["                        { return symbol(sym.QUOTELBRACKET); }
-<YYINITIAL> "#["                        { return symbol(sym.HASHLBRACKETOLON); }
-<YYINITIAL> "@{"                        { return symbol(sym.ATLBRACE); }
-<YYINITIAL> "'{"                        { return symbol(sym.QUOTELBRACE); }
+<YYINITIAL> "@("                        { return ATSTypes.ATLPAREN; }
+<YYINITIAL> "'("                        { return ATSTypes.QUOTELPAREN; }
+<YYINITIAL> "@["                        { return ATSTypes.ATLBRACKET; }
+<YYINITIAL> "'["                        { return ATSTypes.QUOTELBRACKET; }
+<YYINITIAL> "#["                        { return ATSTypes.HASHLBRACKETOLON; }
+<YYINITIAL> "@{"                        { return ATSTypes.ATLBRACE; }
+<YYINITIAL> "'{"                        { return ATSTypes.QUOTELBRACE; }
 //
 // For macros:
 //
-<YYINITIAL> "`("                        { return symbol(sym.BQUOTELPAREN); }
-<YYINITIAL> ",("                        { return symbol(sym.COMMALPAREN); }
-<YYINITIAL> "%("                        { return symbol(sym.LPAREN); }
+<YYINITIAL> "`("                        { return ATSTypes.BQUOTELPAREN; }
+<YYINITIAL> ",("                        { return ATSTypes.COMMALPAREN; }
+<YYINITIAL> "%("                        { return ATSTypes.LPAREN; }
 //
-<YYINITIAL> ""                          { return symbol(sym.EXTCODE); } //FIX_ME
+<YYINITIAL> ""                          { return ATSTypes.EXTCODE; } //FIX_ME
 //
-<YYINITIAL> {END_OF_LINE_COMMENT}       { return symbol(sym.COMMENT_line); }
-<YYINITIAL> {TRADITIONAL_COMMENT}       { return symbol(sym.COMMENT_block); }
-<YYINITIAL> {END_OF_FILE_COMMENT}       { return symbol(sym.COMMENT_rest); }
+<YYINITIAL> {END_OF_LINE_COMMENT}       { return ATSTypes.COMMENT_line; }
+<YYINITIAL> {TRADITIONAL_COMMENT}       { return ATSTypes.COMMENT_block; }
+<YYINITIAL> {END_OF_FILE_COMMENT}       { return ATSTypes.COMMENT_rest; }
 //
-<YYINITIAL> "%"                         { return symbol(sym.PERCENT); }
-<YYINITIAL> "?"                         { return symbol(sym.QMARK); }
+<YYINITIAL> "%"                         { return ATSTypes.PERCENT; }
+<YYINITIAL> "?"                         { return ATSTypes.QMARK; }
 //
-<<EOF>>                                 { return symbol(sym.EOF); }
+<<EOF>>                                 { return ATSTypes.EOF; }
 [^]         {throw new Error("Illegal character <"+yytext()+">"); }
 //
 
