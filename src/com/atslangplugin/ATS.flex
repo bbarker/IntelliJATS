@@ -20,7 +20,6 @@ import com.intellij.psi.TokenType;
 %{
   // Not sure if needed:
   StringBuffer string = new StringBuffer();
-
 %}
 
 CRLF = \n|\r|\r\n
@@ -32,13 +31,18 @@ VALUE_CHARACTER = [^ \n\r\f\\] | "\\"{CRLF} | "\\".
 
 /* Should we be using ATS datatypes names? */
 /* comments */
-COMMENT = {TRADITIONAL_COMMENT} | {END_OF_LINE_COMMENT} | {DOCUMENTATION_COMMENT} | {COMMENT_CONTENT}
+COMMENT = {TRADITIONAL_COMMENT} | {END_OF_LINE_COMMENT} | {END_OF_FILE_COMMENT}
+        | {DOCUMENTATION_COMMENT} | {COMMENT_CONTENT}
 END_OF_LINE_COMMENT = "//" {VALUE_CHARACTER}* {CRLF}?
+END_OF_FILE_COMMENT = "////" (.* {CRLF}?)* // CHECK_ME
 DOCUMENTATION_COMMENT = "(*" (\*+\ +{CRLF}?)* {COMMENT_CONTENT} (\*+\ +{CRLF}?)* "*)"
 COMMENT_CONTENT = ( [^*] | \*+ [^)*] ) // should we delimit the ')' ?
 TRADITIONAL_COMMENT = "(*" [^*] ~"*)"
 
+OCT_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
 DEC_INT_LITERAL = 0 | [1-9][0-9]* // CHECK_ME
+HEX_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
+
 
 %state STRING
 
@@ -97,7 +101,8 @@ DEC_INT_LITERAL = 0 | [1-9][0-9]* // CHECK_ME
 //
 <YYINITIAL> "~"                         { return symbol(sym.TILDE); }
 //
-<YYINITIAL> "absview"|"absviewtype"|"absviewt@ype"
+<YYINITIAL> "abstype"|"abst0ype"|"absprop"|"absview"|
+            "absviewtype"|"absvtype"|"absviewt@ype"|"absvt0ype"|"absviewt0ype"
                                         { return symbol(sym.ABSTYPE); }
 //
 <YYINITIAL> "and"                       { return symbol(sym.AND); }
@@ -110,7 +115,8 @@ DEC_INT_LITERAL = 0 | [1-9][0-9]* // CHECK_ME
 <YYINITIAL> "classdec"                  { return symbol(sym.CLASSDEC); }
 <YYINITIAL> "datasort"                  { return symbol(sym.DATASORT); }
 // BB: surprising to me these all generate the same token:
-<YYINITIAL> "datatype"|"dataprop"|"dataview"|"dataviewtype"
+// (but maybe not exactly, see ./src/pats_lexing_token.dats)
+<YYINITIAL> "datatype"|"dataprop"|"dataview"|"dataviewtype"|"datavtype"
                                         { return symbol(sym.DATATYPE); }
 <YYINITIAL> "do"                        { return symbol(sym.DO); }
 <YYINITIAL> "dynload"                   { return symbol(sym.DYNLOAD); }
@@ -126,7 +132,7 @@ DEC_INT_LITERAL = 0 | [1-9][0-9]* // CHECK_ME
 <YYINITIAL> "infix"|"infixl"|"infixr"|"prefix"|"postfix"
                                         { return symbol(sym.FIXITY); }
 <YYINITIAL> "for*"                      { return symbol(sym.FORSTAR); }
-<YYINITIAL> "fn"|"fnx"|"fun"|"prfn"|"prfun"
+<YYINITIAL> "fn"|"fnx"|"fun"|"prfn"|"prfun"|"praxi"|"castfn"
                                         { return symbol(sym.FUN); }
 <YYINITIAL> "if"                        { return symbol(sym.IF); } // dynamic
 <YYINITIAL> "implement"|"primplement"   { return symbol(sym.IMPLEMENT); }
@@ -228,6 +234,65 @@ DEC_INT_LITERAL = 0 | [1-9][0-9]* // CHECK_ME
 <YYINITIAL> "#then"                     { return symbol(sym.SRPTHEN); }
 <YYINITIAL> "#undef"                    { return symbol(sym.SRPUNDEF); }
 //
+// The internal lexing of views + types seems to be a bit complicated
+// For now I try to simplify it a bit; currently not handled: (FIX_ME)
+// T_IDENT_alp
+//
+<YYINITIAL> ""                          { return symbol(sym.INT); }  // FIX_ME
+<YYINITIAL> ""                          { return symbol(sym.CHAR); }  // FIX_ME
+<YYINITIAL> ""                          { return symbol(sym.FLOAT); }  // FIX_ME
+<YYINITIAL> ""                          { return symbol(sym.CDATA); }  // FIX_ME
+<YYINITIAL> ""                          { return symbol(sym.STRING); }  // FIX_ME
+//
+/*
+  | T_LABEL of (int(*knd*), string) // HX-2013-01: should it be supported?
+*/
+//
+<YYINITIAL> ","                         { return symbol(sym.COMMA); }
+<YYINITIAL> ";"                         { return symbol(sym.SEMICOLON); }
+//
+<YYINITIAL> "("                         { return symbol(sym.LPAREN); }
+<YYINITIAL> ")"                         { return symbol(sym.RPAREN); }
+<YYINITIAL> "["                         { return symbol(sym.LBRACKET); }
+<YYINITIAL> "]"                         { return symbol(sym.RBRACKET); }
+<YYINITIAL> "{"                         { return symbol(sym.LBRACE); }
+<YYINITIAL> "}"                         { return symbol(sym.RBRACE); }
+//
+<YYINITIAL> "@("                        { return symbol(sym.ATLPAREN); }
+<YYINITIAL> "'("                        { return symbol(sym.QUOTELPAREN); }
+<YYINITIAL> "@["                        { return symbol(sym.ATLBRACKET); }
+<YYINITIAL> "'["                        { return symbol(sym.QUOTELBRACKET); }
+<YYINITIAL> "#["                        { return symbol(sym.HASHLBRACKETOLON); }
+<YYINITIAL> "@{"                        { return symbol(sym.ATLBRACE); }
+<YYINITIAL> "'{"                        { return symbol(sym.QUOTELBRACE); }
+//
+// For macros:
+//
+<YYINITIAL> "`("                        { return symbol(sym.BQUOTELPAREN); }
+<YYINITIAL> ",("                        { return symbol(sym.COMMALPAREN); }
+<YYINITIAL> "%("                        { return symbol(sym.LPAREN); }
+//
+<YYINITIAL> ""                          { return symbol(sym.EXTCODE); } //FIX_ME
+//
+<YYINITIAL> {END_OF_LINE_COMMENT}       { return symbol(sym.COMMENT_line); }
+<YYINITIAL> {TRADITIONAL_COMMENT}       { return symbol(sym.COMMENT_block); }
+<YYINITIAL> {END_OF_FILE_COMMENT}       { return symbol(sym.COMMENT_rest); }
+//
+<YYINITIAL> "%"                         { return symbol(sym.PERCENT); }
+<YYINITIAL> "?"                         { return symbol(sym.QMARK); }
+//
+<<EOF>>                                 { return symbol(sym.EOF); }
+[^]         {throw new Error("Illegal character <"+yytext()+">"); }
+//
+
+
+
+
+
+
+
+
+
 
 
 
