@@ -24,3 +24,5 @@ build/*
 *.so
 
 ###### end of [.gitignore] ######
+
+src/com/atslangplugin/ATS.bnf

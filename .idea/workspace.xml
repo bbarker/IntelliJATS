@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e65758fc-8b40-4a41-b749-8c9358314295" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/atslangplugin/ATSLexerAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/atslangplugin/ATS.bnf" afterPath="$PROJECT_DIR$/src/com/atslangplugin/ATS.bnf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/atslangplugin/ATS.flex" afterPath="$PROJECT_DIR$/src/com/atslangplugin/ATS.flex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/atslangplugin/ATSLexer.java" afterPath="$PROJECT_DIR$/src/com/atslangplugin/ATSLexer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IntelliJATS.iml" afterPath="$PROJECT_DIR$/IntelliJATS.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/atslangplugin/parser/ATSParser.java" afterPath="$PROJECT_DIR$/gen/com/atslangplugin/parser/ATSParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSProperty.java" afterPath="$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSProperty.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/atslangplugin/psi/impl/ATSPropertyImpl.java" afterPath="$PROJECT_DIR$/gen/com/atslangplugin/psi/impl/ATSPropertyImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSTypes.java" afterPath="$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSTypes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSVisitor.java" afterPath="$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSVisitor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="IntelliJATS.iws" />
@@ -30,138 +35,129 @@
     <favorites_list name="IntelliJATS" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="plugin.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5172415" vertical-offset="0" max-vertical-offset="833">
-              <caret line="6" column="13" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ATS.flex" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATS.flex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.8275862" vertical-offset="2726" max-vertical-offset="5440">
-              <caret line="170" column="64" selection-start-line="170" selection-start-column="64" selection-end-line="170" selection-end-column="64" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ATSLexerAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATSLexerAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ATSLexer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATSLexer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="15679" max-vertical-offset="24327">
-              <caret line="932" column="0" selection-start-line="932" selection-start-column="0" selection-end-line="932" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#22949#22950#0" expanded="true" />
-                <element signature="e#22977#22978#0" expanded="true" />
-                <element signature="e#23185#23186#0" expanded="true" />
-                <element signature="e#23234#23235#0" expanded="true" />
-                <element signature="e#23827#23828#0" expanded="true" />
-                <element signature="e#23855#23856#0" expanded="true" />
-                <element signature="e#23890#23891#0" expanded="true" />
-                <element signature="e#23935#23936#0" expanded="true" />
-                <element signature="e#24646#24647#0" expanded="true" />
-                <element signature="e#24677#24678#0" expanded="true" />
-                <element signature="e#24815#24816#0" expanded="true" />
-                <element signature="e#24850#24851#0" expanded="true" />
-                <element signature="e#24968#24969#0" expanded="true" />
-                <element signature="e#25031#25032#0" expanded="true" />
-                <element signature="e#25587#25588#0" expanded="true" />
-                <element signature="e#25627#25628#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ATSTypes.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSTypes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48080808" vertical-offset="0" max-vertical-offset="527">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="coroutine.dats" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/Coroutine/DATS/coroutine.dats">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2788">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ATSTokenType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/psi/ATSTokenType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#395#396#0" expanded="true" />
-                <element signature="e#449#450#0" expanded="true" />
-                <element signature="e#494#495#0" expanded="true" />
-                <element signature="e#551#552#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ATS.bnf" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATS.bnf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.724138" vertical-offset="0" max-vertical-offset="442">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#418#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ATSElementType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/psi/ATSElementType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#361#362#0" expanded="true" />
-                <element signature="e#416#417#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5936953">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="plugin.xml" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-3.5172415" vertical-offset="0" max-vertical-offset="833">
+                  <caret line="6" column="13" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="13" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ATS.flex" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATS.flex">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="-6.37931" vertical-offset="4592" max-vertical-offset="5491">
+                  <caret line="281" column="73" selection-start-line="281" selection-start-column="73" selection-end-line="281" selection-end-column="73" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ATSLexerAdapter.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATSLexerAdapter.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+                  <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ATSLexer.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATSLexer.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.15011038" vertical-offset="0" max-vertical-offset="24463">
+                  <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+                  <folding>
+                    <element signature="e#23049#23050#0" expanded="true" />
+                    <element signature="e#23077#23078#0" expanded="true" />
+                    <element signature="e#23285#23286#0" expanded="true" />
+                    <element signature="e#23334#23335#0" expanded="true" />
+                    <element signature="e#23927#23928#0" expanded="true" />
+                    <element signature="e#23955#23956#0" expanded="true" />
+                    <element signature="e#23990#23991#0" expanded="true" />
+                    <element signature="e#24035#24036#0" expanded="true" />
+                    <element signature="e#24746#24747#0" expanded="true" />
+                    <element signature="e#24777#24778#0" expanded="true" />
+                    <element signature="e#24915#24916#0" expanded="true" />
+                    <element signature="e#24950#24951#0" expanded="true" />
+                    <element signature="e#25068#25069#0" expanded="true" />
+                    <element signature="e#25131#25132#0" expanded="true" />
+                    <element signature="e#25687#25688#0" expanded="true" />
+                    <element signature="e#25727#25728#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ATSTypes.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSTypes.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="2771" max-vertical-offset="3298">
+                  <caret line="173" column="39" selection-start-line="173" selection-start-column="39" selection-end-line="173" selection-end-column="39" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ATSElementType.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/psi/ATSElementType.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+                  <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#361#362#0" expanded="true" />
+                    <element signature="e#416#417#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="ATS.bnf" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATS.bnf">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="6.1721992" vertical-offset="0" max-vertical-offset="3162">
+                  <caret line="175" column="14" selection-start-line="175" selection-start-column="14" selection-end-line="175" selection-end-column="14" />
+                  <folding>
+                    <element signature="e#0#418#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+                  <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -188,11 +184,12 @@
         <option value="$PROJECT_DIR$/src/com/atslangplugin/ATSTokenType.java" />
         <option value="$PROJECT_DIR$/src/com/atslangplugin/psi/ATSElementType.java" />
         <option value="$PROJECT_DIR$/src/com/atslangplugin/psi/ATSTokenType.java" />
-        <option value="$PROJECT_DIR$/src/com/atslangplugin/ATS.bnf" />
         <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/com/atsplugin/ATSLexer.java" />
         <option value="$PROJECT_DIR$/src/com/atslangplugin/ATSLexerAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/atslangplugin/ATSLexer.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/com/atslangplugin/ATS.bnf" />
         <option value="$PROJECT_DIR$/src/com/atslangplugin/ATS.flex" />
       </list>
     </option>
@@ -870,11 +867,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="666">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-3.5172415" vertical-offset="0" max-vertical-offset="833">
+          <caret line="6" column="13" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/psi/ATSTokenType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37777779" vertical-offset="0" max-vertical-offset="495">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#449#450#0" expanded="true" />
+            <element signature="e#494#495#0" expanded="true" />
+            <element signature="e#551#552#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -886,10 +897,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+    <entry file="file://$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSTypes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5172415" vertical-offset="0" max-vertical-offset="833">
-          <caret line="6" column="13" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2771" max-vertical-offset="3298">
+          <caret line="173" column="39" selection-start-line="173" selection-start-column="39" selection-end-line="173" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -906,30 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/psi/ATSTokenType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#395#396#0" expanded="true" />
-            <element signature="e#449#450#0" expanded="true" />
-            <element signature="e#494#495#0" expanded="true" />
-            <element signature="e#551#552#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATS.bnf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.724138" vertical-offset="0" max-vertical-offset="442">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#418#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATSLexerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
@@ -938,45 +933,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATS.bnf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.1721992" vertical-offset="0" max-vertical-offset="3162">
+          <caret line="175" column="14" selection-start-line="175" selection-start-column="14" selection-end-line="175" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#418#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATS.flex">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.8275862" vertical-offset="2726" max-vertical-offset="5440">
-          <caret line="170" column="64" selection-start-line="170" selection-start-column="64" selection-end-line="170" selection-end-column="64" />
+        <state vertical-scroll-proportion="-6.37931" vertical-offset="4592" max-vertical-offset="5491">
+          <caret line="281" column="73" selection-start-line="281" selection-start-column="73" selection-end-line="281" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/atslangplugin/ATSLexer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="15679" max-vertical-offset="24327">
-          <caret line="932" column="0" selection-start-line="932" selection-start-column="0" selection-end-line="932" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.15011038" vertical-offset="0" max-vertical-offset="24463">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#22949#22950#0" expanded="true" />
-            <element signature="e#22977#22978#0" expanded="true" />
-            <element signature="e#23185#23186#0" expanded="true" />
-            <element signature="e#23234#23235#0" expanded="true" />
-            <element signature="e#23827#23828#0" expanded="true" />
-            <element signature="e#23855#23856#0" expanded="true" />
-            <element signature="e#23890#23891#0" expanded="true" />
-            <element signature="e#23935#23936#0" expanded="true" />
-            <element signature="e#24646#24647#0" expanded="true" />
-            <element signature="e#24677#24678#0" expanded="true" />
-            <element signature="e#24815#24816#0" expanded="true" />
-            <element signature="e#24850#24851#0" expanded="true" />
-            <element signature="e#24968#24969#0" expanded="true" />
-            <element signature="e#25031#25032#0" expanded="true" />
-            <element signature="e#25587#25588#0" expanded="true" />
-            <element signature="e#25627#25628#0" expanded="true" />
+            <element signature="e#23049#23050#0" expanded="true" />
+            <element signature="e#23077#23078#0" expanded="true" />
+            <element signature="e#23285#23286#0" expanded="true" />
+            <element signature="e#23334#23335#0" expanded="true" />
+            <element signature="e#23927#23928#0" expanded="true" />
+            <element signature="e#23955#23956#0" expanded="true" />
+            <element signature="e#23990#23991#0" expanded="true" />
+            <element signature="e#24035#24036#0" expanded="true" />
+            <element signature="e#24746#24747#0" expanded="true" />
+            <element signature="e#24777#24778#0" expanded="true" />
+            <element signature="e#24915#24916#0" expanded="true" />
+            <element signature="e#24950#24951#0" expanded="true" />
+            <element signature="e#25068#25069#0" expanded="true" />
+            <element signature="e#25131#25132#0" expanded="true" />
+            <element signature="e#25687#25688#0" expanded="true" />
+            <element signature="e#25727#25728#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gen/com/atslangplugin/psi/ATSTypes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48080808" vertical-offset="0" max-vertical-offset="527">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -11,7 +11,7 @@ import com.intellij.psi.TokenType;
 %implements FlexLexer
 %unicode
 %function advance
-%type IElement
+%type IElementType
 %line
 %column
 %eof{ return;
@@ -20,6 +20,10 @@ import com.intellij.psi.TokenType;
 %{
   // Not sure if needed:
   StringBuffer string = new StringBuffer();
+
+  // Placeholders for line and column information:
+  private int yyline;
+  private int yycolumn;
 %}
 
 CRLF = \n|\r|\r\n
@@ -108,7 +112,6 @@ HEX_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
 <YYINITIAL> "and"                       { return ATSTypes.AND; }
 <YYINITIAL> "as"                        { return ATSTypes.AS; }
 <YYINITIAL> "assume"                    { return ATSTypes.ASSUME; }
-<YYINITIAL> "begin"                     { return ATSTypes.BEGIN; }
 <YYINITIAL> "begin"                     { return ATSTypes.BEGIN; }
 <YYINITIAL> "case"|"case-"|"case+"|"prcase"
                                         { return ATSTypes.CASE; }
@@ -270,13 +273,13 @@ HEX_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
 //
 <YYINITIAL> "`("                        { return ATSTypes.BQUOTELPAREN; }
 <YYINITIAL> ",("                        { return ATSTypes.COMMALPAREN; }
-<YYINITIAL> "%("                        { return ATSTypes.LPAREN; }
+<YYINITIAL> "%("                        { return ATSTypes.PERCENTLPAREN; }
 //
 <YYINITIAL> ""                          { return ATSTypes.EXTCODE; } //FIX_ME
 //
-<YYINITIAL> {END_OF_LINE_COMMENT}       { return ATSTypes.COMMENT_line; }
-<YYINITIAL> {TRADITIONAL_COMMENT}       { return ATSTypes.COMMENT_block; }
-<YYINITIAL> {END_OF_FILE_COMMENT}       { return ATSTypes.COMMENT_rest; }
+<YYINITIAL> {END_OF_LINE_COMMENT}       { return ATSTypes.COMMENT_LINE; }
+<YYINITIAL> {TRADITIONAL_COMMENT}       { return ATSTypes.COMMENT_BLOCK; }
+<YYINITIAL> {END_OF_FILE_COMMENT}       { return ATSTypes.COMMENT_REST; }
 //
 <YYINITIAL> "%"                         { return ATSTypes.PERCENT; }
 <YYINITIAL> "?"                         { return ATSTypes.QMARK; }

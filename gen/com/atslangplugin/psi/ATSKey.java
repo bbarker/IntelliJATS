@@ -5,9 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface ATSProperty extends PsiElement {
-
-  @Nullable
-  ATSKey getKey();
+public interface ATSKey extends PsiElement {
 
 }
