@@ -26,6 +26,7 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
+    <lang.parserDefinition language="ATS" implementationClass="com.atslangplugin.ATSParserDefinition"/>
     <fileTypeFactory implementation="com.atslangplugin.ATSFileTypeFactory"/>
   </extensions>
 

@@ -280,6 +280,7 @@ HEX_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
 <YYINITIAL> {END_OF_LINE_COMMENT}       { return ATSTypes.COMMENT_LINE; }
 <YYINITIAL> {TRADITIONAL_COMMENT}       { return ATSTypes.COMMENT_BLOCK; }
 <YYINITIAL> {END_OF_FILE_COMMENT}       { return ATSTypes.COMMENT_REST; }
+<YYINITIAL> {COMMENT}                   { return ATSTypes.COMMENT; }
 //
 <YYINITIAL> "%"                         { return ATSTypes.PERCENT; }
 <YYINITIAL> "?"                         { return ATSTypes.QMARK; }
