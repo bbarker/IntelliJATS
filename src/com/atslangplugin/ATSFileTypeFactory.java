@@ -26,7 +26,7 @@ public class ATSFileTypeFactory extends FileTypeFactory {
         ATSSourceExtensions.add(2, ATSFileTypeInclude.INSTANCE.getDefaultExtension());
 
         for (String s: ATSSourceExtensions) {
-            matcherList.add(new ExactFileNameMatcher(s));
+            matcherList.add(new ExtensionFileNameMatcher(s));
         }
 
         fileTypeConsumer.consume(ATSFileTypeDynamic.INSTANCE,
