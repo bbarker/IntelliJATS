@@ -210,7 +210,7 @@ public class ATSParser implements PsiParser {
   // COMMENT_REST |
   // PERCENT |
   // QMARK |
-  // EOF |
+  // EOF
   public static boolean KEY(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "KEY")) return false;
     boolean r;
@@ -374,7 +374,6 @@ public class ATSParser implements PsiParser {
     if (!r) r = consumeToken(b, PERCENT);
     if (!r) r = consumeToken(b, QMARK);
     if (!r) r = consumeToken(b, EOF);
-    if (!r) r = consumeToken(b, KEY_159_0);
     exit_section_(b, l, m, KEY, r, false, null);
     return r;
   }

@@ -103,7 +103,6 @@ public interface ATSTypes {
   IElementType IMPORT = new ATSTokenType("IMPORT");
   IElementType IN = new ATSTokenType("IN");
   IElementType INT = new ATSTokenType("INT");
-  IElementType KEY_159_0 = new ATSTokenType("KEY_159_0");
   IElementType LAM = new ATSTokenType("LAM");
   IElementType LBRACE = new ATSTokenType("LBRACE");
   IElementType LBRACKET = new ATSTokenType("LBRACKET");
