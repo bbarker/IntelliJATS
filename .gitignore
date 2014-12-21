@@ -20,6 +20,7 @@ hs_err_pid*
 *_?ats.c
 *.exe
 build/*
+out/*
 .gradle/*
 *.so
 
