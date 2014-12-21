@@ -4,7 +4,7 @@ package com.atslangplugin;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import com.atslangplugin.psi.ATSTypes;
+import com.atslangplugin.ATSTypes;
 import com.intellij.psi.TokenType;
 
 

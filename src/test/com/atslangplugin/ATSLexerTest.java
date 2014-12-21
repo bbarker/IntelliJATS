@@ -15,12 +15,14 @@ import java.io.File;
 */ 
 public class ATSLexerTest { 
 
+   private final String coroutinePath =
+           "../../Resources/Coroutine/DATS/coroutine.dats";
    private File coroutineFile;
    private java.io.FileReader coroutineReader;
 
 @Before
 public void before() throws Exception {
-   coroutineFile = new File(getClass().getResource("../../Resources/Coroutine/DATS/coroutine.dats").getFile());
+   coroutineFile = new File(getClass().getResource(coroutinePath).getFile());
    coroutineReader = new java.io.FileReader(coroutineFile);
 } 
 
