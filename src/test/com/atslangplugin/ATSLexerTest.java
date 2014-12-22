@@ -1,8 +1,15 @@
-package test.com.atslangplugin; 
+package test.com.atslangplugin;
 
-import org.junit.Test; 
+// !!! This test is deprecated, see:
+// https://devnet.jetbrains.com/message/5531516#5531516
+
+import com.atslangplugin.ATSTypes;
+import com.intellij.psi.tree.IElementType;
+import org.junit.Test;
 import org.junit.Before; 
-import org.junit.After;
+import org.junit.After; 
+
+import com.atslangplugin.ATSLexer;
 
 import java.io.File;
 
@@ -12,24 +19,29 @@ import java.io.File;
 * @author Brandon Elam Barker
 * @since <pre>Dec 21, 2014</pre> 
 * @version 1.0 
-*/ 
+*/
+
+@Deprecated
 public class ATSLexerTest { 
 
-   private final String coroutinePath =
+   private static final String coroutinePath =
            "../../Resources/Coroutine/DATS/coroutine.dats";
    private File coroutineFile;
-   private java.io.FileReader coroutineReader;
+   private java.io.Reader coroutineReader;
+   private ATSLexer coroutineLexer;
 
-@Before
+@Before // Before each test
 public void before() throws Exception {
-   coroutineFile = new File(getClass().getResource(coroutinePath).getFile());
-   coroutineReader = new java.io.FileReader(coroutineFile);
-} 
+//   coroutineFile = new File(getClass().getResource(coroutinePath).getFile());
+//   coroutineReader = new java.io.FileReader(coroutineFile);
+//   coroutineLexer = new ATSLexer(coroutineReader);
+//
 
-@After
+}
+
+@After // After each test
 public void after() throws Exception {
-   coroutineReader.close();
-} 
+}
 
 /** 
 * 
@@ -127,8 +139,31 @@ public void testYypushback() throws Exception {
 * 
 */ 
 @Test
-public void testAdvance() throws Exception { 
-//TODO: Test goes here... 
+public void testAdvance() throws Exception {
+
+   IElementType token;
+   int i = 0;
+   coroutineReader = new java.io.StringReader("/"+"/"+"This is a comment" +
+           "int x =5;");
+   coroutineLexer = new ATSLexer(coroutineReader);
+   System.out.println(coroutineLexer.yylength());
+   token = coroutineLexer.advance();
+   /*
+   while ((token = coroutineLexer.advance()) != ATSTypes.EOF) {
+      i = i + 1;
+      System.out.print(i);
+      System.out.print(": ");
+      System.out.println(token.toString());
+      break;
+   }
+   */
+   System.out.println(coroutineLexer.yylength());
+   System.out.println(token.toString());
+
+   // Temp test:
+   char[] mycbuf = new char[100];
+   coroutineReader.read(mycbuf,0,99);
+   System.out.println(mycbuf);
 } 
 
 
