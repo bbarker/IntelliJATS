@@ -32,6 +32,39 @@ public void before() throws Exception {
 public void after() throws Exception { 
 }
 
+/**
+ *
+ * @param charSeqATS
+ *
+ * An auxiliary method for scanning an entire
+ * source code segment.
+ *
+ */
+public void scanFile(CharSequence charSeqATS) {
+    myLexerAdapter.start(charSeqATS);
+    IElementType token;
+    String tokenStr;
+    int tokenCount = 0;
+    while ((token = myLexerAdapter.getTokenType()) != ATSTokenTypes.EOF
+            && tokenCount < 20)
+    {
+        tokenCount++;
+        tokenStr = token.toString();
+        Integer yyline = myLexerAdapter.getYyline();
+        Integer yycol = myLexerAdapter.getYycolumn();
+        System.out.println(tokenStr + " at " + yyline.toString() +
+        ", " + yycol.toString());
+        myLexerAdapter.advance();
+    }
+}
+
+/**
+ *
+  * @throws Exception
+ *
+ * This is a simple test for correctness, making sure
+ * several tokens are as expected.
+ */
 @Test
 public void testAdvance() throws Exception {
     myLexerAdapter.start(twoLinesATS);
@@ -40,35 +73,26 @@ public void testAdvance() throws Exception {
     String tokenStr;
     token = myLexerAdapter.getTokenType();
     //Assert.assertEquals(token, ATSTokenTypes.COMMENT);
-    tokenStr = token.toString();
-    System.out.println(tokenStr);
     //
     myLexerAdapter.advance();
     token = myLexerAdapter.getTokenType();
     //Assert.assertEquals(token, ATSTokenTypes.INT);
-    tokenStr = token.toString();
-    System.out.println(tokenStr);
     //
-    myLexerAdapter.advance();
-    token = myLexerAdapter.getTokenType();
-    //Assert.assertEquals(token, ATSTokenTypes.INT);
-    tokenStr = token.toString();
-    System.out.println(tokenStr);
-    //
-    myLexerAdapter.advance();
-    token = myLexerAdapter.getTokenType();
-    //Assert.assertEquals(token, ATSTokenTypes.INT);
-    tokenStr = token.toString();
-    System.out.println(tokenStr);
-    //
-    myLexerAdapter.advance();
-    token = myLexerAdapter.getTokenType();
-    //Assert.assertEquals(token, ATSTokenTypes.INT);
-    tokenStr = token.toString();
-    System.out.println(tokenStr);
+
 
 }
 
+    /**
+     *
+     * @throws Exception
+     *
+     * Tests for completion of scanning several ATS2 files.
+     *
+     */
+@Test
+public void testAdvance2() throws Exception {
+    scanFile(twoLinesATS);
 
+}
 
 } 

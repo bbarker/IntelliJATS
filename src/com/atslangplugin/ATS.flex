@@ -25,6 +25,10 @@ import com.intellij.psi.TokenType;
   // Placeholders for line and column information:
   private int yyline;
   private int yycolumn;
+
+  public int getYyline() { return yyline; }
+  public int getYycolumn() { return yycolumn; }
+
 %}
 
 

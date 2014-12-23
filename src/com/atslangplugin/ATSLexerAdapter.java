@@ -9,7 +9,12 @@ import java.io.Reader;
  */
 public class ATSLexerAdapter extends FlexAdapter {
 
+    private ATSLexer myFlex = null;
     public ATSLexerAdapter() {
-        super(new ATSLexer((Reader) null));
+        super( new ATSLexer((Reader) null) );
+        myFlex = (ATSLexer) this.getFlex();
     }
+
+    public int getYyline() { return myFlex.getYyline(); }
+    public int getYycolumn() { return myFlex.getYycolumn(); }
 }
