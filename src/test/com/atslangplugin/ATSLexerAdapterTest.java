@@ -48,6 +48,24 @@ public void testAdvance() throws Exception {
     //Assert.assertEquals(token, ATSTokenTypes.INT);
     tokenStr = token.toString();
     System.out.println(tokenStr);
+    //
+    myLexerAdapter.advance();
+    token = myLexerAdapter.getTokenType();
+    //Assert.assertEquals(token, ATSTokenTypes.INT);
+    tokenStr = token.toString();
+    System.out.println(tokenStr);
+    //
+    myLexerAdapter.advance();
+    token = myLexerAdapter.getTokenType();
+    //Assert.assertEquals(token, ATSTokenTypes.INT);
+    tokenStr = token.toString();
+    System.out.println(tokenStr);
+    //
+    myLexerAdapter.advance();
+    token = myLexerAdapter.getTokenType();
+    //Assert.assertEquals(token, ATSTokenTypes.INT);
+    tokenStr = token.toString();
+    System.out.println(tokenStr);
 
 }
 

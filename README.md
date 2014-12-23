@@ -4,4 +4,11 @@ IntelliJATS
 An ATS Plugin for IntelliJ IDEA.
 
 ## Important Notes for Development
-If you plan to try using the PSI parser or possibly other parts of the PSI toolkit, you'll need to mark the `gen` folder as a "Sources Root" in IntelliJ.
+
+Before working with this project, you'll want to follow
+the prerequisites found in the [IntelliJ Documentation]
+(https://confluence.jetbrains.com/display/IntelliJIDEA/Prerequisites).
+
+If you plan to try using the PSI parser or possibly other
+parts of the PSI toolkit, you'll need to mark the `gen` folder as a
+"Sources Root" in IntelliJ.
