@@ -338,7 +338,8 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 //
 // Match anything not picked up and throw an error:
 //
-[^]         { throw new Error("Illegal character <"+yytext()+">"); }
+[^]         { throw new Error("Illegal character at " + yyline + ", " +
+                              yycolumn +": <"+yytext()+">"); }
 ""          { return ATSTokenTypes.NONE; } // CHECK_ME
 //
 
