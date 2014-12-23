@@ -2,7 +2,7 @@ package com.atslangplugin;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import com.atslangplugin.ATSTypes;
+import com.atslangplugin.ATSTokenTypes;
 import com.intellij.psi.TokenType;
 
 %%
@@ -27,24 +27,38 @@ import com.intellij.psi.TokenType;
   private int yycolumn;
 %}
 
+
+
+// Old patterns:
+IDENTIFIER= ([:letter:]|_) ([:letter:]|{DIGIT}|_ )*
+
+ESCAPE_SEQUENCE=\\[^\r\n]
+CRLF=(\n | \r | \r\n)
+
 DIGIT=[0-9]
 OCTAL_DIGIT=[0-7]
 HEX_DIGIT=[0-9A-Fa-f]
-SIMPLE_SPACE_CHAR=[\ \t\f]
-NEWLINE_SPACE_CHAR=(\n | \r | \r\n)
-WHITE_SPACE_CHAR=[\ \n\r\t\f]
 
-IDENTIFIER= ([:letter:]|_) ([:letter:]|{DIGIT}|_ )*
-
-C_STYLE_COMMENT=("/*"[^"*"]{COMMENT_TAIL})|"/*"
-
-COMMENT_TAIL=([^"*"]*("*"+[^"*""/"])?)*("*"+"/")?
-DOC_COMMENT="/*""*"+("/"|([^"/""*"]{COMMENT_TAIL}))?
-END_OF_LINE_COMMENT="/""/"([^\r\n]|(\\\r?\n))*
-
-INTEGER_LITERAL={DECIMAL_INTEGER_LITERAL}|{HEX_INTEGER_LITERAL}
+INTEGER_LITERAL={DECIMAL_INTEGER_LITERAL}|{OCTAL_INTEGER_LITERAL}|{HEX_INTEGER_LITERAL}
 DECIMAL_INTEGER_LITERAL=(0|([1-9]({DIGIT})*))
 HEX_INTEGER_LITERAL=0[Xx]({HEX_DIGIT})*
+OCTAL_INTEGER_LITERAL=0({OCTAL_DIGIT})*
+
+// for DEFINE:
+SIMPLE_SPACE_CHAR=[\ \t\f]
+SIMPLE_PRE_KEYWORD=(include|ifdef|endif|undef|ifndef|error|defined)
+
+WHITE_SPACE=[\ \n\r\t\f]
+
+/* comments */
+END_OF_LINE_COMMENT="/""/"([^\r\n]|(\\\r?\n))*
+COMMENT_TAIL=([^"*"]*("*"+[^"*"")"])?)*("*"+")")?
+TRADITIONAL_COMMENT=("(*"[^"*"]{COMMENT_TAIL})|"*)"
+END_OF_FILE_COMMENT = "////" (.* {CRLF}?)* // CHECK_ME
+DOCUMENTATION_COMMENT="(*""*"+("("|([^"(""*"]{COMMENT_TAIL}))?
+//DOCUMENTATION_COMMENT = "(*" (\*+\ +{CRLF}?)* {COMMENT_CONTENT} (\*+\ +{CRLF}?)* "*)"
+//COMMENT_CONTENT = ( [^*] | \*+ [^)*] ) // should we delimit the ')' ?
+COMMENT = {TRADITIONAL_COMMENT} | {END_OF_LINE_COMMENT} | {END_OF_FILE_COMMENT} | {DOCUMENTATION_COMMENT}
 
 FLOAT_LITERAL=({FLOATING_POINT_LITERAL1})|({FLOATING_POINT_LITERAL2})|({FLOATING_POINT_LITERAL3})|({FLOATING_POINT_LITERAL4})
 FLOATING_POINT_LITERAL1=({DIGIT})+"."({DIGIT})*({EXPONENT_PART})?
@@ -53,33 +67,11 @@ FLOATING_POINT_LITERAL3=({DIGIT})+({EXPONENT_PART})
 FLOATING_POINT_LITERAL4=({DIGIT})+
 EXPONENT_PART=[Ee]["+""-"]?({DIGIT})*
 
-QUOTED_LITERAL="'"([^\\\'\r\n]|{ESCAPE_SEQUENCE})*("'"|\\)?
-DOUBLE_QUOTED_LITERAL=\"([^\\\"\r\n]|{ESCAPE_SEQUENCE})*(\"|\\)?
-ESCAPE_SEQUENCE=\\[^\r\n]
-SIMPLE_PRE_KEYWORD=(include|ifdef|endif|undef|ifndef|error|defined)
-
-// Old patterns:
-
-CRLF = \n|\r|\r\n
-WHITE_SPACE = {CRLF} | [\ \t\f]
-FIRST_VALUE_CHARACTER = [^ \n\r\f\\] | "\\"{CRLF} | "\\".
-VALUE_CHARACTER = [^ \n\r\f\\] | "\\"{CRLF} | "\\".
-
-/* Should VALUE_CHARACTER include or exclude comments? */
-
-/* Should we be using ATS datatypes names? */
-/* comments */
-COMMENT = {TRADITIONAL_COMMENT} | {END_OF_LINE_COMMENT} | {END_OF_FILE_COMMENT} | {DOCUMENTATION_COMMENT} | {COMMENT_CONTENT}
-END_OF_LINE_COMMENT = "//" .* {CRLF}?
-END_OF_FILE_COMMENT = "////" (.* {CRLF}?)* // CHECK_ME
-DOCUMENTATION_COMMENT = "(*" (\*+\ +{CRLF}?)* {COMMENT_CONTENT} (\*+\ +{CRLF}?)* "*)"
-COMMENT_CONTENT = ( [^*] | \*+ [^)*] ) // should we delimit the ')' ?
-TRADITIONAL_COMMENT = "(*" [^*] ~"*)"
-
-OCT_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
-DEC_INT_LITERAL = 0 | [1-9][0-9]* // CHECK_ME
-HEX_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
-
+CHAR_SINGLEQ_BASE=[^\\\'\r\n]|{ESCAPE_SEQUENCE}
+CHAR_DOUBLEQ_BASE=[^\\\"\r\n]|{ESCAPE_SEQUENCE}
+QUOTED_LITERAL="'"({CHAR_SINGLEQ_BASE})*("'"|\\)?
+DOUBLE_QUOTED_LITERAL=\"({CHAR_DOUBLEQ_BASE})*(\"|\\)?
+CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)?
 
 %state STRING
 %state PRE
@@ -98,233 +90,239 @@ HEX_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
 /*  *** *** keywords and symbols  *** ***  */
 
 <YYINITIAL> {
-""          { return ATSTypes.NONE; } // CHECK_ME
+"'("                        { return ATSTokenTypes.QUOTELPAREN; }
+"["                         { return ATSTokenTypes.LBRACKET; }
+"{"                         { return ATSTokenTypes.LBRACE; }
+"'["                        { return ATSTokenTypes.QUOTELBRACKET; }
+"'{"                        { return ATSTokenTypes.QUOTELBRACE; }
 //
-"@"         { return ATSTypes.AT; }
+"@"                         { return ATSTokenTypes.AT; }
 //
-"\\"        { return ATSTypes.BACKSLASH; }
-"!"         { return ATSTypes.BANG; }
-"`"         { return ATSTypes.BQUOTE; }
+"\\"                        { return ATSTokenTypes.BACKSLASH; }
+"!"                         { return ATSTokenTypes.BANG; }
+"`"                         { return ATSTokenTypes.BQUOTE; }
 //
-":"         { return ATSTypes.COLON; }
-":<"        { return ATSTypes.COLONLT; }
+":"                         { return ATSTokenTypes.COLON; }
+":<"                        { return ATSTokenTypes.COLONLT; }
 /*
   | T_COLONLTGT of () // :<> // HX: impossible
 */
 //
-"$"                         { return ATSTypes.DOLLAR; }
+"$"                         { return ATSTokenTypes.DOLLAR; }
 //
-"."                         { return ATSTypes.DOT; }
-".."                        { return ATSTypes.DOTDOT; }
-"..."                       { return ATSTypes.DOTDOTDOT; }
+"."                         { return ATSTokenTypes.DOT; }
+".."                        { return ATSTokenTypes.DOTDOT; }
+"..."                       { return ATSTokenTypes.DOTDOTDOT; }
 //
-"."{DEC_INT_LITERAL}        { return ATSTypes.DOTINT; }
+"."({DIGIT}+)               { return ATSTokenTypes.DOTINT; }
 //
-"="                         { return ATSTypes.EQ; }
-"=>"                        { return ATSTypes.EQGT; }
-"=<"                        { return ATSTypes.EQLT; }
-"=<>"                       { return ATSTypes.EQLTGT; }
-"=/=>"                      { return ATSTypes.EQSLASHEQGT; }
-"=>>"                       { return ATSTypes.EQGTGT; }
-"=/=>>"                     { return ATSTypes.EQSLASHEQGTGT; }
+"="                         { return ATSTokenTypes.EQ; }
+"=>"                        { return ATSTokenTypes.EQGT; }
+"=<"                        { return ATSTokenTypes.EQLT; }
+"=<>"                       { return ATSTokenTypes.EQLTGT; }
+"=/=>"                      { return ATSTokenTypes.EQSLASHEQGT; }
+"=>>"                       { return ATSTokenTypes.EQGTGT; }
+"=/=>>"                     { return ATSTokenTypes.EQSLASHEQGTGT; }
 //
-"#"                         { return ATSTypes.HASH; }
+"#"                         { return ATSTokenTypes.HASH; }
 //
-"<"                         { return ATSTypes.LT; } // for opening a tmparg
-">"                         { return ATSTypes.GT; } // for closing a tmparg
+"<"                         { return ATSTokenTypes.LT; } // for opening a tmparg
+">"                         { return ATSTokenTypes.GT; } // for closing a tmparg
 //
-"<>"                        { return ATSTypes.GTLT; }
-".<"                        { return ATSTypes.DOTLT; } // opening termetric
-">."                        { return ATSTypes.GTDOT; } // closing termetric
-".<>."                      { return ATSTypes.DOTLTGTDOT; } // empty termetric
+"<>"                        { return ATSTokenTypes.GTLT; }
+".<"                        { return ATSTokenTypes.DOTLT; } // opening termetric
+">."                        { return ATSTokenTypes.GTDOT; } // closing termetric
+".<>."                      { return ATSTokenTypes.DOTLTGTDOT; } // empty termetric
 //
-"->"                        { return ATSTypes.MINUSGT; }
-"-<"                        { return ATSTypes.MINUSLT; }
-"-<>"                       { return ATSTypes.MINUSLTGT; }
+"->"                        { return ATSTokenTypes.MINUSGT; }
+"-<"                        { return ATSTokenTypes.MINUSLT; }
+"-<>"                       { return ATSTokenTypes.MINUSLTGT; }
 //
-"~"                         { return ATSTypes.TILDE; }
+"~"                         { return ATSTokenTypes.TILDE; }
 //
-"abstype"|"abst0ype"|"absprop"|"absview"|
-            "absviewtype"|"absvtype"|"absviewt@ype"|"absvt0ype"|"absviewt0ype"
-                                        { return ATSTypes.ABSTYPE; }
+"abstype"|"abst0ype"|"absprop"|"absview"| "absviewtype"|
+"absvtype"|"absviewt@ype"|"absvt0ype"|"absviewt0ype"
+                            { return ATSTokenTypes.ABSTYPE; }
 //
-"and"                       { return ATSTypes.AND; }
-"as"                        { return ATSTypes.AS; }
-"assume"                    { return ATSTypes.ASSUME; }
-"begin"                     { return ATSTypes.BEGIN; }
+"and"                       { return ATSTokenTypes.AND; }
+"as"                        { return ATSTokenTypes.AS; }
+"assume"                    { return ATSTokenTypes.ASSUME; }
+"begin"                     { return ATSTokenTypes.BEGIN; }
 "case"|"case-"|"case+"|"prcase"
-                                        { return ATSTypes.CASE; }
-"classdec"                  { return ATSTypes.CLASSDEC; }
-"datasort"                  { return ATSTypes.DATASORT; }
+                            { return ATSTokenTypes.CASE; }
+"classdec"                  { return ATSTokenTypes.CLASSDEC; }
+"datasort"                  { return ATSTokenTypes.DATASORT; }
 // BB: surprising to me these all generate the same token:
 // (but maybe not exactly, see ./src/pats_lexing_token.dats)
 "datatype"|"dataprop"|"dataview"|"dataviewtype"|"datavtype"
-                                        { return ATSTypes.DATATYPE; }
-"do"                        { return ATSTypes.DO; }
-"dynload"                   { return ATSTypes.DYNLOAD; }
-"else"                      { return ATSTypes.ELSE; }
-"end"                       { return ATSTypes.END; }
-"exception"                 { return ATSTypes.EXCEPTION; }
+                            { return ATSTokenTypes.DATATYPE; }
+"do"                        { return ATSTokenTypes.DO; }
+"dynload"                   { return ATSTokenTypes.DYNLOAD; }
+"else"                      { return ATSTokenTypes.ELSE; }
+"end"                       { return ATSTokenTypes.END; }
+"exception"                 { return ATSTokenTypes.EXCEPTION; }
 //
-"extern"                    { return ATSTypes.EXTERN; }
-"extype"                    { return ATSTypes.EXTYPE; }
-"extvar"                    { return ATSTypes.EXTVAR; }
+"extern"                    { return ATSTokenTypes.EXTERN; }
+"extype"                    { return ATSTokenTypes.EXTYPE; }
+"extvar"                    { return ATSTokenTypes.EXTVAR; }
 //
-"fix"|"fix@"                { return ATSTypes.FIX; }
+"fix"|"fix@"                { return ATSTokenTypes.FIX; }
 "infix"|"infixl"|"infixr"|"prefix"|"postfix"
-                                        { return ATSTypes.FIXITY; }
-"for*"                      { return ATSTypes.FORSTAR; }
+                            { return ATSTokenTypes.FIXITY; }
+"for*"                      { return ATSTokenTypes.FORSTAR; }
 "fn"|"fnx"|"fun"|"prfn"|"prfun"|"praxi"|"castfn"
-                                        { return ATSTypes.FUN; }
-"if"                        { return ATSTypes.IF; } // dynamic
-"implement"|"primplement"   { return ATSTypes.IMPLEMENT; }
-"import"                    { return ATSTypes.IMPORT; }
-"in"                        { return ATSTypes.IN; }
-"lam"|"llam"|"lam@"         { return ATSTypes.LAM; }
-"let"                       { return ATSTypes.LET; }
-"local"                     { return ATSTypes.LOCAL; }
-"macdef"|"macrodef"         { return ATSTypes.MACDEF; }
-"nonfix"                    { return ATSTypes.NONFIX; }
-"overload"                  { return ATSTypes.OVERLOAD; }
-"of"                        { return ATSTypes.OF; }
-"op"                        { return ATSTypes.OP; }
-"rec"                       { return ATSTypes.REC; }
-"ref@"                      { return ATSTypes.REFAT; }
-"require"                   { return ATSTypes.REQUIRE; }
-"scase"                     { return ATSTypes.SCASE; }
-"sif"                       { return ATSTypes.SIF; } // static
-"sortdef"                   { return ATSTypes.SORTDEF; }
-"stacst"                    { return ATSTypes.STACST; }
-"stadef"                    { return ATSTypes.STADEF; }
-"staload"                   { return ATSTypes.STALOAD; }
-"static"                    { return ATSTypes.STATIC; }
+                            { return ATSTokenTypes.FUN; }
+"if"                        { return ATSTokenTypes.IF; } // dynamic
+"implement"|"primplement"   { return ATSTokenTypes.IMPLEMENT; }
+"import"                    { return ATSTokenTypes.IMPORT; }
+"in"                        { return ATSTokenTypes.IN; }
+"lam"|"llam"|"lam@"         { return ATSTokenTypes.LAM; }
+"let"                       { return ATSTokenTypes.LET; }
+"local"                     { return ATSTokenTypes.LOCAL; }
+"macdef"|"macrodef"         { return ATSTokenTypes.MACDEF; }
+"nonfix"                    { return ATSTokenTypes.NONFIX; }
+"overload"                  { return ATSTokenTypes.OVERLOAD; }
+"of"                        { return ATSTokenTypes.OF; }
+"op"                        { return ATSTokenTypes.OP; }
+"rec"                       { return ATSTokenTypes.REC; }
+"ref@"                      { return ATSTokenTypes.REFAT; }
+"require"                   { return ATSTokenTypes.REQUIRE; }
+"scase"                     { return ATSTokenTypes.SCASE; }
+"sif"                       { return ATSTokenTypes.SIF; } // static
+"sortdef"                   { return ATSTokenTypes.SORTDEF; }
+"stacst"                    { return ATSTokenTypes.STACST; }
+"stadef"                    { return ATSTokenTypes.STADEF; }
+"staload"                   { return ATSTokenTypes.STALOAD; }
+"static"                    { return ATSTokenTypes.STATIC; }
 /*
   | T_STAVAR of () // stavar // HX: a suspended hack
 */
-"symelim"                   { return ATSTypes.SYMELIM; }
-"symintr"                   { return ATSTypes.SYMINTR; }
-"then"                      { return ATSTypes.THEN; }
-"tkindef"                   { return ATSTypes.TKINDEF; }
-"try"                       { return ATSTypes.TRY; }
-"type"|"type+"|"type-"      { return ATSTypes.TYPE; }
+"symelim"                   { return ATSTokenTypes.SYMELIM; }
+"symintr"                   { return ATSTokenTypes.SYMINTR; }
+"then"                      { return ATSTokenTypes.THEN; }
+"tkindef"                   { return ATSTokenTypes.TKINDEF; }
+"try"                       { return ATSTokenTypes.TRY; }
+"type"|"type+"|"type-"      { return ATSTokenTypes.TYPE; }
 "typedef"|"propdef"|"viewdef"|"viewtypedef" // CHECK_ME: aliases?
-                                        { return ATSTypes.TYPEDEF; }
-"val"|"val+"|"val-"|"prval" { return ATSTypes.VAL; }
-"var"|"prvar"               { return ATSTypes.VAR; }
-"when"                      { return ATSTypes.WHEN; }
-"where"                     { return ATSTypes.WHERE; }
-"while"                     { return ATSTypes.WHILE; }
-"while*"                    { return ATSTypes.WHILESTAR; }
-"with"                      { return ATSTypes.WITH; }
+                            { return ATSTokenTypes.TYPEDEF; }
+"val"|"val+"|"val-"|"prval" { return ATSTokenTypes.VAL; }
+"var"|"prvar"               { return ATSTokenTypes.VAR; }
+"when"                      { return ATSTokenTypes.WHEN; }
+"where"                     { return ATSTokenTypes.WHERE; }
+"while"                     { return ATSTokenTypes.WHILE; }
+"while*"                    { return ATSTokenTypes.WHILESTAR; }
+"with"                      { return ATSTokenTypes.WITH; }
 "withtype"|"withprop"|"withview"|"withviewtype"
-                                        { return ATSTypes.WITHTYPE; }
+                            { return ATSTokenTypes.WITHTYPE; }
 //
-"addr@"                     { return ATSTypes.ADDRAT; }
-"fold@"                     { return ATSTypes.FOLDAT; }
-"free@"                     { return ATSTypes.FREEAT; }
-"view@"                     { return ATSTypes.VIEWAT; }
+"addr@"                     { return ATSTokenTypes.ADDRAT; }
+"fold@"                     { return ATSTokenTypes.FOLDAT; }
+"free@"                     { return ATSTokenTypes.FREEAT; }
+"view@"                     { return ATSTokenTypes.VIEWAT; }
 //
-"$arrpsz"|"$arrptrsize"     { return ATSTypes.DLRARRPSZ; }
+"$arrpsz"|"$arrptrsize"     { return ATSTokenTypes.DLRARRPSZ; }
 //
-"$delay"|"$ldelay"          { return ATSTypes.DLRDELAY; }
+"$delay"|"$ldelay"          { return ATSTokenTypes.DLRDELAY; }
 //
-"$effmask"                  { return ATSTypes.DLREFFMASK; }
+"$effmask"                  { return ATSTokenTypes.DLREFFMASK; }
 "ntm"|"exn"|"ref"|"wrt"|"all"
-                                        { return ATSTypes.DLREFFMASK_ARG; }
-"$extern"                   { return ATSTypes.DLREXTERN; }
-"$extkind"                  { return ATSTypes.DLREXTKIND; }
-"$extype"                   { return ATSTypes.DLREXTYPE; }
-"$extype_struct"            { return ATSTypes.DLREXTYPE_STRUCT; }
+                            { return ATSTokenTypes.DLREFFMASK_ARG; }
+"$extern"                   { return ATSTokenTypes.DLREXTERN; }
+"$extkind"                  { return ATSTokenTypes.DLREXTKIND; }
+"$extype"                   { return ATSTokenTypes.DLREXTYPE; }
+"$extype_struct"            { return ATSTokenTypes.DLREXTYPE_STRUCT; }
 //
-"$extval"                   { return ATSTypes.DLREXTVAL; }
-"$extfcall"                 { return ATSTypes.DLREXTFCALL; }
-"$extmcall"                 { return ATSTypes.DLREXTMCALL; }
+"$extval"                   { return ATSTokenTypes.DLREXTVAL; }
+"$extfcall"                 { return ATSTokenTypes.DLREXTFCALL; }
+"$extmcall"                 { return ATSTokenTypes.DLREXTMCALL; }
 //
-"$break"                    { return ATSTypes.DLRBREAK; }
-"$continue"                 { return ATSTypes.DLRCONTINUE; }
-"$raise"                    { return ATSTypes.DLRRAISE; }
+"$break"                    { return ATSTokenTypes.DLRBREAK; }
+"$continue"                 { return ATSTokenTypes.DLRCONTINUE; }
+"$raise"                    { return ATSTokenTypes.DLRRAISE; }
 //
 "$lst"|"$list"|"$lst_t"|"$list_t"|"$lst_vt"|"$list_vt"
-                                        { return ATSTypes.DLRLST; }
+                            { return ATSTokenTypes.DLRLST; }
 "$rec"|"$record"|"$rec_t"|"$record_t"|"$rec_vt"|"$record_vt"
-                                        { return ATSTypes.DLRREC; }
+                            { return ATSTokenTypes.DLRREC; }
 "$tup"|"$tup_t"|"$tup_vt"|"$tuple"|"$tuple_t"|"$tuple_vt"
-                                        { return ATSTypes.DLRTUP; }
+                            { return ATSTokenTypes.DLRTUP; }
 //
-"$myfilename"               { return ATSTypes.DLRMYFILENAME; }
-"$mylocation"               { return ATSTypes.DLRMYLOCATION; }
-"$myfunction"               { return ATSTypes.DLRMYFUNCTION; }
+"$myfilename"               { return ATSTokenTypes.DLRMYFILENAME; }
+"$mylocation"               { return ATSTokenTypes.DLRMYLOCATION; }
+"$myfunction"               { return ATSTokenTypes.DLRMYFUNCTION; }
 //
-"$showtype"                 { return ATSTypes.DLRSHOWTYPE; }
+"$showtype"                 { return ATSTokenTypes.DLRSHOWTYPE; }
 //
 "$vcopyenv_v"|"$vcopyenv_vt(vt)"
-                                        { return ATSTypes.DLRVCOPYENV; }
+                            { return ATSTokenTypes.DLRVCOPYENV; }
 //
-"#assert"                   { return ATSTypes.SRPASSERT; }
-"#define"                   { return ATSTypes.SRPDEFINE; }
-"#elif"                     { return ATSTypes.SRPELIF; }
-"#elifdef"                  { return ATSTypes.SRPELIFDEF; }
-"#elifndef"                 { return ATSTypes.SRPELIFNDEF; }
-"#else"                     { return ATSTypes.SRPELSE; }
-"#endif"                    { return ATSTypes.SRPENDIF; }
-"#error"                    { return ATSTypes.SRPERROR; }
-"#if"                       { return ATSTypes.SRPIF; }
-"#ifdef"                    { return ATSTypes.SRPIFDEF; }
-"#ifndef"                   { return ATSTypes.SRPIFNDEF; }
-"#include"                  { return ATSTypes.SRPINCLUDE; }
-"#print"                    { return ATSTypes.SRPPRINT; }
-"#then"                     { return ATSTypes.SRPTHEN; }
-"#undef"                    { return ATSTypes.SRPUNDEF; }
+"#assert"                   { return ATSTokenTypes.SRPASSERT; }
+"#define"                   { return ATSTokenTypes.SRPDEFINE; }
+"#elif"                     { return ATSTokenTypes.SRPELIF; }
+"#elifdef"                  { return ATSTokenTypes.SRPELIFDEF; }
+"#elifndef"                 { return ATSTokenTypes.SRPELIFNDEF; }
+"#else"                     { return ATSTokenTypes.SRPELSE; }
+"#endif"                    { return ATSTokenTypes.SRPENDIF; }
+"#error"                    { return ATSTokenTypes.SRPERROR; }
+"#if"                       { return ATSTokenTypes.SRPIF; }
+"#ifdef"                    { return ATSTokenTypes.SRPIFDEF; }
+"#ifndef"                   { return ATSTokenTypes.SRPIFNDEF; }
+"#include"                  { return ATSTokenTypes.SRPINCLUDE; }
+"#print"                    { return ATSTokenTypes.SRPPRINT; }
+"#then"                     { return ATSTokenTypes.SRPTHEN; }
+"#undef"                    { return ATSTokenTypes.SRPUNDEF; }
 //
 // The internal lexing of views + types seems to be a bit complicated
 // For now I try to simplify it a bit; currently not handled: (FIX_ME)
 // T_IDENT_alp
 //
-""                          { return ATSTypes.INT; }  // FIX_ME
-""                          { return ATSTypes.CHAR; }  // FIX_ME
-""                          { return ATSTypes.FLOAT; }  // FIX_ME
-""                          { return ATSTypes.CDATA; }  // FIX_ME
-""                          { return ATSTypes.STRING; }  // FIX_ME
+{INTEGER_LITERAL}           { return ATSTokenTypes.INT; }  // CHECK_ME
+{CHAR_LITERAL}              { return ATSTokenTypes.CHAR; }  // CHECK_ME
+{FLOAT_LITERAL}             { return ATSTokenTypes.FLOAT; }
+//""                          { return ATSTokenTypes.CDATA; }  // FIX_ME
+{QUOTED_LITERAL}|{DOUBLE_QUOTED_LITERAL}
+                            { return ATSTokenTypes.STRING; }  // CHECK_ME
 //
 /*
   | T_LABEL of (int(*knd*), string) // HX-2013-01: should it be supported?
 */
 //
-","                         { return ATSTypes.COMMA; }
-";"                         { return ATSTypes.SEMICOLON; }
+","                         { return ATSTokenTypes.COMMA; }
+";"                         { return ATSTokenTypes.SEMICOLON; }
 //
-"("                         { return ATSTypes.LPAREN; }
-")"                         { return ATSTypes.RPAREN; }
-"["                         { return ATSTypes.LBRACKET; }
-"]"                         { return ATSTypes.RBRACKET; }
-"{"                         { return ATSTypes.LBRACE; }
-"}"                         { return ATSTypes.RBRACE; }
+"("                         { return ATSTokenTypes.LPAREN; }
+")"                         { return ATSTokenTypes.RPAREN; }
+"]"                         { return ATSTokenTypes.RBRACKET; }
+"}"                         { return ATSTokenTypes.RBRACE; }
 //
-"@("                        { return ATSTypes.ATLPAREN; }
-"'("                        { return ATSTypes.QUOTELPAREN; }
-"@["                        { return ATSTypes.ATLBRACKET; }
-"'["                        { return ATSTypes.QUOTELBRACKET; }
-"#["                        { return ATSTypes.HASHLBRACKETOLON; }
-"@{"                        { return ATSTypes.ATLBRACE; }
-"'{"                        { return ATSTypes.QUOTELBRACE; }
+"@("                        { return ATSTokenTypes.ATLPAREN; }
+"@["                        { return ATSTokenTypes.ATLBRACKET; }
+"#["                        { return ATSTokenTypes.HASHLBRACKETOLON; }
+"@{"                        { return ATSTokenTypes.ATLBRACE; }
 //
 // For macros:
 //
-"`("                        { return ATSTypes.BQUOTELPAREN; }
-",("                        { return ATSTypes.COMMALPAREN; }
-"%("                        { return ATSTypes.PERCENTLPAREN; }
+"`("                        { return ATSTokenTypes.BQUOTELPAREN; }
+",("                        { return ATSTokenTypes.COMMALPAREN; }
+"%("                        { return ATSTokenTypes.PERCENTLPAREN; }
 //
-""                          { return ATSTypes.EXTCODE; } //FIX_ME
+""                          { return ATSTokenTypes.EXTCODE; } //FIX_ME
 //
-{END_OF_LINE_COMMENT}       { return ATSTypes.COMMENT_LINE; }
-{TRADITIONAL_COMMENT}       { return ATSTypes.COMMENT_BLOCK; }
-{END_OF_FILE_COMMENT}       { return ATSTypes.COMMENT_REST; }
-{COMMENT}                   { return ATSTypes.COMMENT; }
+{END_OF_LINE_COMMENT}       { return ATSTokenTypes.COMMENT_LINE; }
+{TRADITIONAL_COMMENT}       { return ATSTokenTypes.COMMENT_BLOCK; }
+{END_OF_FILE_COMMENT}       { return ATSTokenTypes.COMMENT_REST; }
+{COMMENT}                   { return ATSTokenTypes.COMMENT; }
 // FIX_ME for the next two ("can never be matched")
-"%"                         { return ATSTypes.PERCENT; }
-"?"                         { return ATSTypes.QMARK; }
+"%"                         { return ATSTokenTypes.PERCENT; }
+"?"                         { return ATSTokenTypes.QMARK; }
+
+//Not ATS tokens, precisely:
+{WHITE_SPACE}               { return ATSTokenTypes.WHITE_SPACE; }
+{IDENTIFIER}                { return ATSTokenTypes.IDENTIFIER; }
+
 } // End of <YYINITIAL>
 
+/* Not using for now
 <STRING> {
 \" { yybegin(YYINITIAL); return symbol(sym.STRING_LITERAL, string.toString()); }
 [^\n\r\"\\]+ { string.append( yytext() ); }
@@ -334,13 +332,14 @@ HEX_INT_LITERAL = 0 | [1-9][0-9]* // FIX_ME
 \\\" { string.append('\"'); }
 \\ { string.append('\\'); }
 } // End of <STRING>
-
+*/
 //
-<<EOF>>                                 { return ATSTypes.EOF; }
+<<EOF>>                     { return ATSTokenTypes.EOF; }
 //
 // Match anything not picked up and throw an error:
 //
-[^]         {throw new Error("Illegal character <"+yytext()+">"); }
+[^]         { throw new Error("Illegal character <"+yytext()+">"); }
+""          { return ATSTokenTypes.NONE; } // CHECK_ME
 //
 
 

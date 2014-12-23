@@ -3,7 +3,7 @@ package test.com.atslangplugin;
 // !!! This test is deprecated, see:
 // https://devnet.jetbrains.com/message/5531516#5531516
 
-import com.atslangplugin.ATSTypes;
+import com.atslangplugin.ATSTokenTypes;
 import com.intellij.psi.tree.IElementType;
 import org.junit.Test;
 import org.junit.Before; 

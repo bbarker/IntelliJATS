@@ -36,7 +36,7 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(ATSTypes.END_OF_LINE_COMMENT)) {
+        if (tokenType.equals(ATSTokenTypes.COMMENT_LINE)) {
             return new TextAttributesKey[]{BLOCK_COMMENT};
         } else {
             return new TextAttributesKey[]{LOCAL_VARIABLE};

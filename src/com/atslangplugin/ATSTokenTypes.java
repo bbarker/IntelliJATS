@@ -12,7 +12,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 
-public interface ATSTypes {
+public interface ATSTokenTypes {
 
   IElementType KEY = new ATSElementType("KEY");
   IElementType PROPERTY = new ATSElementType("PROPERTY");
@@ -104,6 +104,7 @@ public interface ATSTypes {
   IElementType GTLT = new ATSTokenType("GTLT");
   IElementType HASH = new ATSTokenType("HASH");
   IElementType HASHLBRACKETOLON = new ATSTokenType("HASHLBRACKETOLON");
+  IElementType IDENTIFIER = new ATSTokenType("IDENTIFIER"); // Not exactly in ATS (CHECK_ME)
   IElementType IF = new ATSTokenType("IF");
   IElementType IMPLEMENT = new ATSTokenType("IMPLEMENT");
   IElementType IMPORT = new ATSTokenType("IMPORT");
@@ -177,6 +178,7 @@ public interface ATSTypes {
   IElementType WHEN = new ATSTokenType("WHEN");
   IElementType WHERE = new ATSTokenType("WHERE");
   IElementType WHILE = new ATSTokenType("WHILE");
+  IElementType WHITE_SPACE = new ATSTokenType("WHITE_SPACE"); // Not exactly in ATS (CHECK_ME)
   IElementType WHILESTAR = new ATSTokenType("WHILESTAR");
   IElementType WITH = new ATSTokenType("WITH");
   IElementType WITHTYPE = new ATSTokenType("WITHTYPE");
