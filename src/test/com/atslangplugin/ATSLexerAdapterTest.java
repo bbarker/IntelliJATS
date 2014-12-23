@@ -19,7 +19,7 @@ import java.io.StringReader;
 */ 
 public class ATSLexerAdapterTest {
 
-String twoLinesATS = "/"+"/"+"This is a comment\n" + "int x =5;";
+String twoLinesATS = "/"+"/"+"This is a comment\n" + "val x:int =5";
 ATSLexerAdapter myLexerAdapter = null;
 
 @Before
@@ -46,7 +46,7 @@ public void scanFile(CharSequence charSeqATS) {
     String tokenStr;
     int tokenCount = 0;
     while ((token = myLexerAdapter.getTokenType()) != ATSTokenTypes.EOF
-            && tokenCount < 20)
+            && tokenCount < 1000)
     {
         tokenCount++;
         tokenStr = token.toString();
