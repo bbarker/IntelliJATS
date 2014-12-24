@@ -28,6 +28,7 @@ public interface ATSTokenTypes {
   IElementType ATLPAREN = new ATSTokenType("ATLPAREN");
   IElementType BACKSLASH = new ATSTokenType("BACKSLASH");
   IElementType BANG = new ATSTokenType("BANG");
+  IElementType BAR = new ATSTokenType("BAR");
   IElementType BEGIN = new ATSTokenType("BEGIN");
   IElementType BQUOTE = new ATSTokenType("BQUOTE");
   IElementType BQUOTELPAREN = new ATSTokenType("BQUOTELPAREN");
@@ -136,6 +137,7 @@ public interface ATSTokenTypes {
   IElementType RBRACKET = new ATSTokenType("RBRACKET");
   IElementType REC = new ATSTokenType("REC");
   IElementType REFAT = new ATSTokenType("REFAT");
+  IElementType REF_IDENTIFIER = new ATSTokenType("REF_IDENTIFIER"); // (CHECK_ME)
   IElementType REQUIRE = new ATSTokenType("REQUIRE");
   IElementType RPAREN = new ATSTokenType("RPAREN");
   IElementType SCASE = new ATSTokenType("SCASE");
@@ -172,6 +174,7 @@ public interface ATSTokenTypes {
   IElementType TYPE = new ATSTokenType("TYPE");
   IElementType TYPEDEF = new ATSTokenType("TYPEDEF");
   IElementType VAL = new ATSTokenType("VAL");
+  IElementType VAL_IDENTIFIER = new ATSTokenType("VAL_IDENTIFIER"); // (CHECK_ME)
   IElementType VALUE = new ATSTokenType("VALUE");
   IElementType VAR = new ATSTokenType("VAR");
   IElementType VIEWAT = new ATSTokenType("VIEWAT");

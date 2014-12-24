@@ -104,6 +104,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 //
 "\\"                        { return ATSTokenTypes.BACKSLASH; }
 "!"                         { return ATSTokenTypes.BANG; }
+"|"                         { return ATSTokenTypes.BAR; }
 "`"                         { return ATSTokenTypes.BQUOTE; }
 //
 ":"                         { return ATSTokenTypes.COLON; }
@@ -322,7 +323,10 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 
 //Not ATS tokens, precisely:
 {WHITE_SPACE}               { return ATSTokenTypes.WHITE_SPACE; }
+{WHITE_SPACE}               { return ATSTokenTypes.WHITE_SPACE; }
 {IDENTIFIER}                { return ATSTokenTypes.IDENTIFIER; }
+"!"{IDENTIFIER}             { return ATSTokenTypes.VAL_IDENTIFIER; }
+"&"{IDENTIFIER}             { return ATSTokenTypes.REF_IDENTIFIER; }
 
 } // End of <YYINITIAL>
 
