@@ -26,6 +26,60 @@ public class ATSLexerAdapterTest {
 ATSLexerAdapter myLexerAdapter = null;
 //
 String twoLineATS_seq = "/"+"/"+"This is a comment\n" + "val x:int =5";
+
+String settingsPageDemo =
+    "//\n" +
+    "fun copyinto\n" +
+    "  {n:nat} .<n>.\n" +
+    "(\n" +
+    "  xs: !list_vt (a, n), p: ptr\n" +
+    ") :<!wrt> void = let\n" +
+    "in\n" +
+    "//\n" +
+    "case+ xs of\n" +
+    "| @list_vt_cons\n" +
+    "    (x, xs1) => let\n" +
+    "    val (\n" +
+    "    ) = $UN.ptr0_set<a> (addr@(x), $UN.ptr0_get<a> (p))\n" +
+    "    val () = copyinto (xs1, ptr0_succ<a> (p))\n" +
+    "  in\n" +
+    "    fold@ (xs)\n" +
+    "  end // end of [list_vt_cons]\n" +
+    "| list_vt_nil ((*void*)) => ()\n" +
+    "//\n" +
+    "end // end of [copyinto]\n" +
+    "//\n" +
+    "implement\n" +
+    "array_quicksort$cmp<a>\n" +
+    "  (x1, x2) = list_vt_quicksort$cmp<a> (x1, x2)\n" +
+    "// end of [array_quicksort$cmp]\n" +
+    "//\n" +
+    "prval () = lemma_list_vt_param (xs)\n" +
+    "//\n" +
+    "val n = list_vt_length (xs)\n" +
+    "//\n" +
+    "val [l:addr]\n" +
+    "  (pfat, pfgc | p0) = array_ptr_alloc<a> ((i2sz)n)\n" +
+    "//\n" +
+    "extern praxi\n" +
+    "__out (pf: !array_v (a?, l, n) >> array_v (a, l, n)): void\n" +
+    "extern praxi\n" +
+    "__into (pf: !array_v (a, l, n) >> array_v (a?, l, n)): void\n" +
+    "//\n" +
+    "val () = copyout (xs, p0)\n" +
+    "prval () = __out (pfat)\n" +
+    "val () = array_quicksort<a> (!p0, (i2sz)n)\n" +
+    "prval () = __into (pfat)\n" +
+    "val () = copyinto (xs, p0)\n" +
+    "//\n" +
+    "val () = array_ptr_free {a} (pfat, pfgc | p0)\n" +
+    "//\n" +
+    "in\n" +
+    "  xs\n" +
+    "end // end of [list_vt_quicksort]\n" +
+    "\n" +
+    "(* ****** ****** *)\n";
+
 String coroutine_seq = "";
 
 private static final String coroutinePath =
@@ -121,7 +175,8 @@ public void testAdvance() throws Exception {
 public void testAdvance2() throws Exception {
     //scanFile(twoLineATS_seq);
     // How to reset the lexer here?
-    scanFile(coroutine_seq);
+    //scanFile(coroutine_seq);
+    scanFile(settingsPageDemo);
 
 }
 

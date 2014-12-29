@@ -27,6 +27,7 @@ public interface ATSTokenTypes {
   IElementType ATLBRACKET = new ATSTokenType("ATLBRACKET");
   IElementType ATLPAREN = new ATSTokenType("ATLPAREN");
   IElementType BACKSLASH = new ATSTokenType("BACKSLASH");
+  IElementType BAD_CHARACTER = new ATSTokenType("BAD_CHARACTER");
   IElementType BANG = new ATSTokenType("BANG");
   IElementType BAR = new ATSTokenType("BAR");
   IElementType BEGIN = new ATSTokenType("BEGIN");

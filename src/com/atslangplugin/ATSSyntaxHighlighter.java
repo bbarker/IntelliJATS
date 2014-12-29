@@ -57,7 +57,7 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
         } else if (tokenType.equals(ATSTokenTypes.COMMENT)) {
             return ATS_BLOCK_COMMENT_KEYS;
         } else {
-            return new TextAttributesKey[]{LOCAL_VARIABLE};
+            return ATS_LOCAL_VARIABLE_KEYS;
         }
     }
 }
