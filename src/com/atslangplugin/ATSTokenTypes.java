@@ -46,6 +46,7 @@ public interface ATSTokenTypes {
   IElementType COMMENT_LINE = new ATSTokenType("COMMENT_LINE");
   IElementType COMMENT_REST = new ATSTokenType("COMMENT_REST");
   IElementType CRLF = new ATSTokenType("CRLF");
+  IElementType DEBUG_LEX = new ATSTokenType("DEBUG_LEX"); // For testing
   IElementType DATASORT = new ATSTokenType("DATASORT");
   IElementType DATATYPE = new ATSTokenType("DATATYPE");
   IElementType DLRARRPSZ = new ATSTokenType("DLRARRPSZ");

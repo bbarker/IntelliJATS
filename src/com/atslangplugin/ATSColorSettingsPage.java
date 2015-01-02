@@ -28,7 +28,9 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 public class ATSColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
+            new AttributesDescriptor("Bad characters", ATSSyntaxHighlighter.ATS_BAD_CHARACTER),
             new AttributesDescriptor("Comments", ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
+            new AttributesDescriptor("Identifier", ATSSyntaxHighlighter.ATS_IDENTIFIER),
             new AttributesDescriptor("Local variables", ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE)
     };
 
@@ -47,7 +49,7 @@ public class ATSColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDemoText() {
-        return "//\n" +
+        return "//\n" /* +
                 "fun copyinto\n" +
                 "  {n:nat} .<n>.\n" +
                 "(\n" +
@@ -97,7 +99,7 @@ public class ATSColorSettingsPage implements ColorSettingsPage {
                 "  xs\n" +
                 "end // end of [list_vt_quicksort]\n" +
                 "\n" +
-                "(* ****** ****** *)\n";
+                "(* ****** ****** *)\n" */;
     }
 
     @Nullable
