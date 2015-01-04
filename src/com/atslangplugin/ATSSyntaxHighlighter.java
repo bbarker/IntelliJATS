@@ -4,7 +4,9 @@ import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,16 +21,12 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
  * Created by Brandon Elam Barker on 12/21/2014.
  */
 public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
-    public static final TextAttributesKey ATS_BAD_CHARACTER =
-            createTextAttributesKey("BAD_CHARACTER",
-                    new TextAttributes(Color.RED, null, null, null, Font.BOLD));
-    public static final TextAttributesKey ATS_BLOCK_COMMENT =
-            createTextAttributesKey("BLOCK_COMMENT", BLOCK_COMMENT);
     public static final TextAttributesKey ATS_IDENTIFIER =
             createTextAttributesKey("IDENTIFIER", IDENTIFIER);
+    public static final TextAttributesKey ATS_BLOCK_COMMENT =
+            createTextAttributesKey("BLOCK_COMMENT", BLOCK_COMMENT);
     public static final TextAttributesKey ATS_LOCAL_VARIABLE =
             createTextAttributesKey("LOCAL_VARIABLE", LOCAL_VARIABLE);
-
 
     /*
     static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("SIMPLE_BAD_CHARACTER",
@@ -36,12 +34,10 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
 
     private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};
     */
-    private static final TextAttributesKey[] ATS_BAD_CHARACTER_KEYS =
-            new TextAttributesKey[]{ATS_BAD_CHARACTER};
-    private static final TextAttributesKey[] ATS_BLOCK_COMMENT_KEYS =
-            new TextAttributesKey[]{ATS_BLOCK_COMMENT};
     private static final TextAttributesKey[] ATS_IDENTIFIER_KEYS =
             new TextAttributesKey[]{ATS_IDENTIFIER};
+    private static final TextAttributesKey[] ATS_BLOCK_COMMENT_KEYS =
+            new TextAttributesKey[]{ATS_BLOCK_COMMENT};
     private static final TextAttributesKey[] ATS_LOCAL_VARIABLE_KEYS =
             new TextAttributesKey[]{ATS_LOCAL_VARIABLE};
 
@@ -54,14 +50,12 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(ATSTokenTypes.BAD_CHARACTER)) {
-            return ATS_BAD_CHARACTER_KEYS;
+        if (tokenType.equals(ATSTokenTypes.IDENTIFIER)) {
+            return ATS_IDENTIFIER_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.COMMENT_LINE)) {
             return ATS_BLOCK_COMMENT_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.COMMENT)) {
             return ATS_BLOCK_COMMENT_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.IDENTIFIER)) {
-            return ATS_IDENTIFIER_KEYS;
         } else {
             return ATS_LOCAL_VARIABLE_KEYS;
         }
