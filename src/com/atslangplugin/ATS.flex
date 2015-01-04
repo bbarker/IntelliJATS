@@ -341,8 +341,8 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 \\ { string.append('\\'); }
 } // End of <STRING>
 */
-//
-<<EOF>>                     { return ATSTokenTypes.EOF; }
+// This seems to cause a bug (OOME) in IntelliJ:
+//<<EOF>>                     { return ATSTokenTypes.EOF; }
 //
 // Match anything not picked up and throw an error:
 //
