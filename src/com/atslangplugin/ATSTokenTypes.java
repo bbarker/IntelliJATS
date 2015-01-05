@@ -14,9 +14,6 @@ import com.intellij.psi.tree.IElementType;
 
 public interface ATSTokenTypes {
 
-  IElementType KEY = new ATSElementType("KEY");
-  IElementType PROPERTY = new ATSElementType("PROPERTY");
-
   IElementType ABSTYPE = new ATSTokenType("ABSTYPE");
   IElementType ADDRAT = new ATSTokenType("ADDRAT");
   IElementType AND = new ATSTokenType("AND");

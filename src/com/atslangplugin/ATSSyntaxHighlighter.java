@@ -21,25 +21,54 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
  * Created by Brandon Elam Barker on 12/21/2014.
  */
 public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
-    public static final TextAttributesKey ATS_IDENTIFIER =
-            createTextAttributesKey("IDENTIFIER", IDENTIFIER);
+
+
+    //
     public static final TextAttributesKey ATS_BLOCK_COMMENT =
             createTextAttributesKey("BLOCK_COMMENT", BLOCK_COMMENT);
-    public static final TextAttributesKey ATS_LOCAL_VARIABLE =
-            createTextAttributesKey("LOCAL_VARIABLE", LOCAL_VARIABLE);
-
-    /*
-    static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("SIMPLE_BAD_CHARACTER",
-            new TextAttributes(Color.RED, null, null, null, Font.BOLD));
-
-    private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};
-    */
-    private static final TextAttributesKey[] ATS_IDENTIFIER_KEYS =
-            new TextAttributesKey[]{ATS_IDENTIFIER};
     private static final TextAttributesKey[] ATS_BLOCK_COMMENT_KEYS =
             new TextAttributesKey[]{ATS_BLOCK_COMMENT};
+    //
+    public static final TextAttributesKey ATS_BRACES =
+            createTextAttributesKey("BRACES", BRACES);
+    private static final TextAttributesKey[] ATS_BRACES_KEYS =
+            new TextAttributesKey[]{ATS_BRACES};
+    //
+    public static final TextAttributesKey ATS_IDENTIFIER =
+            createTextAttributesKey("IDENTIFIER", IDENTIFIER);
+    private static final TextAttributesKey[] ATS_IDENTIFIER_KEYS =
+            new TextAttributesKey[]{ATS_IDENTIFIER};
+    //
+    public static final TextAttributesKey ATS_LINE_COMMENT =
+            createTextAttributesKey("LINE_COMMENT", LINE_COMMENT);
+    private static final TextAttributesKey[] ATS_LINE_COMMENT_KEYS =
+            new TextAttributesKey[]{ATS_LINE_COMMENT};
+    //
+    public static final TextAttributesKey ATS_KEYWORD =
+            createTextAttributesKey("KEYWORD", KEYWORD);
+    private static final TextAttributesKey[] ATS_KEYWORD_KEYS =
+            new TextAttributesKey[]{ATS_KEYWORD};
+    //
+    public static final TextAttributesKey ATS_LOCAL_VARIABLE =
+            createTextAttributesKey("LOCAL_VARIABLE", LOCAL_VARIABLE);
     private static final TextAttributesKey[] ATS_LOCAL_VARIABLE_KEYS =
             new TextAttributesKey[]{ATS_LOCAL_VARIABLE};
+    //
+    public static final TextAttributesKey ATS_OPERATION_SIGN =
+            createTextAttributesKey("OPERATION_SIGN", OPERATION_SIGN);
+    private static final TextAttributesKey[] ATS_OPERATION_SIGN_KEYS =
+            new TextAttributesKey[]{ATS_OPERATION_SIGN};
+    //
+    public static final TextAttributesKey ATS_PARENTHESES =
+            createTextAttributesKey("PARENTHESES", PARENTHESES);
+    private static final TextAttributesKey[] ATS_PARENTHESES_KEYS =
+            new TextAttributesKey[]{ATS_PARENTHESES};
+    //
+    public static final TextAttributesKey ATS_TYPE_DECLARATIONS =
+            createTextAttributesKey("TYPE_DECLARATIONS", LABEL);
+    private static final TextAttributesKey[] ATS_TYPE_DECLARATIONS_KEYS =
+            new TextAttributesKey[]{ATS_TYPE_DECLARATIONS};
+    //
 
     @NotNull
     @Override
@@ -50,12 +79,28 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(ATSTokenTypes.IDENTIFIER)) {
-            return ATS_IDENTIFIER_KEYS;
+        if (tokenType.equals(ATSTokenTypes.ABSTYPE)) {
+            return ATS_TYPE_DECLARATIONS_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.ADDRAT)) {
+            return ATS_KEYWORD_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.AND)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.AS)) {
+            return ATS_KEYWORD_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.ASSUME)) {
+            return ATS_TYPE_DECLARATIONS_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.AT)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.ATLBRACE)) {
+            return ATS_BRACES_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.ATLPAREN)) {
+            return ATS_PARENTHESES_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.COMMENT_BLOCK)) {
+            return ATS_BLOCK_COMMENT_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.COMMENT_LINE)) {
-            return ATS_BLOCK_COMMENT_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.COMMENT)) {
-            return ATS_BLOCK_COMMENT_KEYS;
+            return ATS_LINE_COMMENT_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.IDENTIFIER)) {
+            return ATS_IDENTIFIER_KEYS;
         } else {
             return ATS_LOCAL_VARIABLE_KEYS;
         }

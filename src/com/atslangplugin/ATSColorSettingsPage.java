@@ -28,8 +28,16 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 public class ATSColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-            new AttributesDescriptor("Comments", ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
-            new AttributesDescriptor("Local variables", ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE)
+            new AttributesDescriptor("Block comments", ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
+            new AttributesDescriptor("Braces", ATSSyntaxHighlighter.ATS_BRACES),
+            new AttributesDescriptor("Identifiers", ATSSyntaxHighlighter.ATS_IDENTIFIER),
+            new AttributesDescriptor("Line comments", ATSSyntaxHighlighter.ATS_LINE_COMMENT),
+            new AttributesDescriptor("Keywords", ATSSyntaxHighlighter.ATS_KEYWORD),
+            new AttributesDescriptor("Local variables", ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE),
+            new AttributesDescriptor("Operator", ATSSyntaxHighlighter.ATS_OPERATION_SIGN),
+            new AttributesDescriptor("Parentheses", ATSSyntaxHighlighter.ATS_PARENTHESES),
+            new AttributesDescriptor("Type declarations", ATSSyntaxHighlighter.ATS_TYPE_DECLARATIONS)
+
     };
 
     @Nullable
