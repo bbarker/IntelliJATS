@@ -1,5 +1,6 @@
 package com.atslangplugin;
 
+import com.atslangplugin.psi.ATSTokenType;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -13,6 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.intellij.openapi.editor.DefaultLanguageHighlighterColors.*;
 
@@ -86,6 +89,69 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     //
 
     @NotNull
+    private static final Map<IElementType, TextAttributesKey[]> tokenColorMap;
+    static{
+        Map<IElementType, TextAttributesKey[]> tmpMap =
+                new HashMap<IElementType, TextAttributesKey[]>();
+        tmpMap.put(ATSTokenTypes.ABSTYPE, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.ADDRAT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.AND, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.AS, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.ASSUME, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.AT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.ATLBRACE, ATS_BRACES_KEYS);
+        tmpMap.put(ATSTokenTypes.ATLPAREN, ATS_BRACES_KEYS);
+        tmpMap.put(ATSTokenTypes.BACKSLASH, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.BANG, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.BAR, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.BEGIN, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.BQUOTE, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.CASE, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.CHAR, ATS_STRING_KEYS);
+        tmpMap.put(ATSTokenTypes.CLASSDEC, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.COLON, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.COLONLT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.COMMA, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.COMMALPAREN, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.COMMENT_BLOCK, ATS_BLOCK_COMMENT_KEYS);
+        tmpMap.put(ATSTokenTypes.COMMENT_LINE, ATS_LINE_COMMENT_KEYS);
+        tmpMap.put(ATSTokenTypes.COMMENT_REST, ATS_BLOCK_COMMENT_KEYS);
+        // Do not want to color CRLF
+        tmpMap.put(ATSTokenTypes.DATASORT, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRARRPSZ, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRBREAK, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRCONTINUE, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRDELAY, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLREFFMASK, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLREFFMASK_ARG, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.DLREXTERN, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLREXTFCALL, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLREXTVAL, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLREXTYPE, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLREXTYPE_STRUCT, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRLST, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRMYFILENAME, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRMYFILENAME, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRMYLOCATION, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRRAISE, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRREC, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRSHOWTYPE, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRTUP, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRVCOPYENV, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DO, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.DOLLAR, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.DOT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.DOTDOT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.DOTDOTDOT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.DOTINT, ATS_KEYWORD_KEYS); // what is it?
+        //
+        tmpMap.put(ATSTokenTypes.IDENTIFIER, ATS_IDENTIFIER_KEYS);
+
+
+        tokenColorMap = tmpMap;
+    }
+
+    @NotNull
     @Override
     public Lexer getHighlightingLexer() {
         return new FlexAdapter(new ATSLexer((Reader) null));
@@ -94,115 +160,10 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-        if (tokenType.equals(ATSTokenTypes.ABSTYPE)) {
-            return ATS_TYPE_DECLARATIONS_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.ADDRAT)) {
-            return ATS_KEYWORD_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.AND)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.AS)) {
-            return ATS_KEYWORD_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.ASSUME)) {
-            return ATS_TYPE_DECLARATIONS_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.AT)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.ATLBRACE)) {
-            return ATS_BRACES_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.ATLPAREN)) {
-            return ATS_PARENTHESES_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.BACKSLASH)) {
-            return ATS_OPERATION_SIGN_KEYS;
-/*        } else if (tokenType.equals(ATSTokenTypes.BAD_CHARACTER)) {
-            return ATS_BAD_CHARACTER_KEYS;*/
-        } else if (tokenType.equals(ATSTokenTypes.BANG)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.BAR)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.BEGIN)) {
-            return ATS_KEYWORD_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.BQUOTE)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.CASE)) {
-            return ATS_KEYWORD_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.CHAR)) {
-            return ATS_STRING_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.CLASSDEC)) {
-            return ATS_TYPE_DECLARATIONS_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.COLON)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.COLONLT)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.COMMA)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.COMMALPAREN)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        // Do not color COMMENT: color specific classes of comments
-        } else if (tokenType.equals(ATSTokenTypes.COMMENT_BLOCK)) {
-            return ATS_BLOCK_COMMENT_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.COMMENT_LINE)) {
-            return ATS_LINE_COMMENT_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.COMMENT_REST)) {
-            return ATS_BLOCK_COMMENT_KEYS;
-        // Do not want to color CRLF
-        } else if (tokenType.equals(ATSTokenTypes.DATASORT)) {
-            return ATS_TYPE_DECLARATIONS_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DATATYPE)) {
-            return ATS_TYPE_DECLARATIONS_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRARRPSZ)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRBREAK)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRCONTINUE)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRDELAY)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLREFFMASK)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLREFFMASK_ARG)) {
-            return ATS_KEYWORD_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLREXTERN)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLREXTFCALL)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLREXTVAL)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLREXTYPE)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLREXTYPE_STRUCT)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRLST)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRMYFILENAME)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRMYFUNCTION)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRMYLOCATION)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRRAISE)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRREC)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRSHOWTYPE)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRTUP)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DLRVCOPYENV)) {
-            return ATS_FUNCTION_CALL_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DO)) {
-            return ATS_KEYWORD_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DOLLAR)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DOT)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DOTDOT)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DOTDOTDOT)) {
-            return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.DOTINT)) { // what is it?
-            return ATS_OPERATION_SIGN_KEYS;
-        //
-        } else if (tokenType.equals(ATSTokenTypes.IDENTIFIER)) {
-            return ATS_IDENTIFIER_KEYS;
+
+        TextAttributesKey[] tokenColor;
+        if ((tokenColor = tokenColorMap.get(tokenType)) != null) {
+            return tokenColor;
         } else {
             return EMPTY_KEYS;
         }
