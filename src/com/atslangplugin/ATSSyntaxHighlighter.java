@@ -67,6 +67,11 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] ATS_LOCAL_VARIABLE_KEYS =
             new TextAttributesKey[]{ATS_LOCAL_VARIABLE};
     //
+    public static final TextAttributesKey ATS_NUMBER =
+            createTextAttributesKey("NUMBER", NUMBER);
+    private static final TextAttributesKey[] ATS_NUMBER_KEYS =
+            new TextAttributesKey[]{ATS_NUMBER};
+    //
     public static final TextAttributesKey ATS_OPERATION_SIGN =
             createTextAttributesKey("OPERATION_SIGN", OPERATION_SIGN);
     private static final TextAttributesKey[] ATS_OPERATION_SIGN_KEYS =
@@ -140,10 +145,35 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
         tmpMap.put(ATSTokenTypes.DLRVCOPYENV, ATS_FUNCTION_CALL_KEYS);
         tmpMap.put(ATSTokenTypes.DO, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.DOLLAR, ATS_OPERATION_SIGN_KEYS);
-        tmpMap.put(ATSTokenTypes.DOT, ATS_KEYWORD_KEYS);
-        tmpMap.put(ATSTokenTypes.DOTDOT, ATS_KEYWORD_KEYS);
-        tmpMap.put(ATSTokenTypes.DOTDOTDOT, ATS_KEYWORD_KEYS);
-        tmpMap.put(ATSTokenTypes.DOTINT, ATS_KEYWORD_KEYS); // what is it?
+        tmpMap.put(ATSTokenTypes.DOT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.DOTDOT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.DOTDOTDOT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.DOTINT, ATS_OPERATION_SIGN_KEYS); // what is it?
+        tmpMap.put(ATSTokenTypes.DOTLT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.DOTLTGTDOT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.DYNLOAD, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.ELSE, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.END, ATS_KEYWORD_KEYS);
+        // don't color EOF
+        tmpMap.put(ATSTokenTypes.EQ, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.EQGT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.EQGTGT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.EQLT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.EQLTGT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.EQSLASHEQGT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.EQSLASHEQGTGT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.EXCEPTION, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.EXTCODE, ATS_BRACES_KEYS);
+        tmpMap.put(ATSTokenTypes.EXTERN, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.EXTVAR, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.FIX, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.FIXITY, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.FLOAT, ATS_NUMBER_KEYS);
+        tmpMap.put(ATSTokenTypes.FOLDAT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.FORSTAR, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.FREEAT, ATS_KEYWORD_KEYS);
+
+
         //
         tmpMap.put(ATSTokenTypes.IDENTIFIER, ATS_IDENTIFIER_KEYS);
 

@@ -43,6 +43,8 @@ DIGIT=[0-9]
 OCTAL_DIGIT=[0-7]
 HEX_DIGIT=[0-9A-Fa-f]
 
+EXTCODE = "%{"|"%{#"|"%{^"|"%{$"|"%}"
+
 INTEGER_LITERAL={DECIMAL_INTEGER_LITERAL}|{OCTAL_INTEGER_LITERAL}|{HEX_INTEGER_LITERAL}
 DECIMAL_INTEGER_LITERAL=(0|([1-9]({DIGIT})*))
 HEX_INTEGER_LITERAL=0[Xx]({HEX_DIGIT})*
@@ -311,7 +313,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 ",("                        { return ATSTokenTypes.COMMALPAREN; }
 "%("                        { return ATSTokenTypes.PERCENTLPAREN; }
 //
-""                          { return ATSTokenTypes.EXTCODE; } //FIX_ME
+{EXTCODE}                   { return ATSTokenTypes.EXTCODE; }
 //
 {END_OF_LINE_COMMENT}       { return ATSTokenTypes.COMMENT_LINE; }
 {TRADITIONAL_COMMENT}       { return ATSTokenTypes.COMMENT_BLOCK; }

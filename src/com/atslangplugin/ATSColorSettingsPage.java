@@ -34,6 +34,7 @@ public class ATSColorSettingsPage implements ColorSettingsPage {
             new AttributesDescriptor("Line comments", ATSSyntaxHighlighter.ATS_LINE_COMMENT),
             new AttributesDescriptor("Keywords", ATSSyntaxHighlighter.ATS_KEYWORD),
             new AttributesDescriptor("Local variables", ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE),
+            new AttributesDescriptor("Operator", ATSSyntaxHighlighter.ATS_NUMBER),
             new AttributesDescriptor("Operator", ATSSyntaxHighlighter.ATS_OPERATION_SIGN),
             new AttributesDescriptor("Parentheses", ATSSyntaxHighlighter.ATS_PARENTHESES),
             new AttributesDescriptor("String", ATSSyntaxHighlighter.ATS_STRING),
