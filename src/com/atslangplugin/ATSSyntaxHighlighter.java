@@ -3,6 +3,7 @@ package com.atslangplugin;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
@@ -23,6 +24,10 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
 
 
+    public static final TextAttributesKey ATS_BAD_CHARACTER =
+            createTextAttributesKey("BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
+    private static final TextAttributesKey[] ATS_BAD_CHARACTER_KEYS =
+            new TextAttributesKey[]{ATS_BAD_CHARACTER};
     //
     public static final TextAttributesKey ATS_BLOCK_COMMENT =
             createTextAttributesKey("BLOCK_COMMENT", BLOCK_COMMENT);
@@ -95,6 +100,22 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
             return ATS_BRACES_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.ATLPAREN)) {
             return ATS_PARENTHESES_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.BACKSLASH)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.BAD_CHARACTER)) {
+            return ATS_BAD_CHARACTER_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.BANG)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.BAR)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.BEGIN)) {
+            return ATS_KEYWORD_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.BQUOTE)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.CASE)) {
+            return ATS_KEYWORD_KEYS;
+
+        //
         } else if (tokenType.equals(ATSTokenTypes.COMMENT_BLOCK)) {
             return ATS_BLOCK_COMMENT_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.COMMENT_LINE)) {

@@ -28,6 +28,7 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 public class ATSColorSettingsPage implements ColorSettingsPage {
     private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
+            new AttributesDescriptor("Bad characters", ATSSyntaxHighlighter.ATS_BAD_CHARACTER),
             new AttributesDescriptor("Block comments", ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
             new AttributesDescriptor("Braces", ATSSyntaxHighlighter.ATS_BRACES),
             new AttributesDescriptor("Identifiers", ATSSyntaxHighlighter.ATS_IDENTIFIER),
