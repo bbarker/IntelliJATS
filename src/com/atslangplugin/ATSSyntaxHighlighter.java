@@ -23,11 +23,11 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
  */
 public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
 
+    // Coloring BAD_CHARACTERs seems to cause a runtime error
+    //
+    private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
+    //
 
-    public static final TextAttributesKey ATS_BAD_CHARACTER =
-            createTextAttributesKey("BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
-    private static final TextAttributesKey[] ATS_BAD_CHARACTER_KEYS =
-            new TextAttributesKey[]{ATS_BAD_CHARACTER};
     //
     public static final TextAttributesKey ATS_BLOCK_COMMENT =
             createTextAttributesKey("BLOCK_COMMENT", BLOCK_COMMENT);
@@ -38,6 +38,11 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("BRACES", BRACES);
     private static final TextAttributesKey[] ATS_BRACES_KEYS =
             new TextAttributesKey[]{ATS_BRACES};
+    //
+    public static final TextAttributesKey ATS_FUNCTION_CALL =
+            createTextAttributesKey("FUNCTION_CALL", FUNCTION_CALL);
+    private static final TextAttributesKey[] ATS_FUNCTION_CALL_KEYS =
+            new TextAttributesKey[]{ATS_FUNCTION_CALL};
     //
     public static final TextAttributesKey ATS_IDENTIFIER =
             createTextAttributesKey("IDENTIFIER", IDENTIFIER);
@@ -68,6 +73,11 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("PARENTHESES", PARENTHESES);
     private static final TextAttributesKey[] ATS_PARENTHESES_KEYS =
             new TextAttributesKey[]{ATS_PARENTHESES};
+    //
+    public static final TextAttributesKey ATS_STRING =
+            createTextAttributesKey("STRING", STRING);
+    private static final TextAttributesKey[] ATS_STRING_KEYS =
+            new TextAttributesKey[]{ATS_STRING};
     //
     public static final TextAttributesKey ATS_TYPE_DECLARATIONS =
             createTextAttributesKey("TYPE_DECLARATIONS", LABEL);
@@ -102,8 +112,8 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
             return ATS_PARENTHESES_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.BACKSLASH)) {
             return ATS_OPERATION_SIGN_KEYS;
-        } else if (tokenType.equals(ATSTokenTypes.BAD_CHARACTER)) {
-            return ATS_BAD_CHARACTER_KEYS;
+/*        } else if (tokenType.equals(ATSTokenTypes.BAD_CHARACTER)) {
+            return ATS_BAD_CHARACTER_KEYS;*/
         } else if (tokenType.equals(ATSTokenTypes.BANG)) {
             return ATS_OPERATION_SIGN_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.BAR)) {
@@ -114,16 +124,87 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
             return ATS_OPERATION_SIGN_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.CASE)) {
             return ATS_KEYWORD_KEYS;
-
-        //
+        } else if (tokenType.equals(ATSTokenTypes.CHAR)) {
+            return ATS_STRING_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.CLASSDEC)) {
+            return ATS_TYPE_DECLARATIONS_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.COLON)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.COLONLT)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.COMMA)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.COMMALPAREN)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        // Do not color COMMENT: color specific classes of comments
         } else if (tokenType.equals(ATSTokenTypes.COMMENT_BLOCK)) {
             return ATS_BLOCK_COMMENT_KEYS;
         } else if (tokenType.equals(ATSTokenTypes.COMMENT_LINE)) {
             return ATS_LINE_COMMENT_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.COMMENT_REST)) {
+            return ATS_BLOCK_COMMENT_KEYS;
+        // Do not want to color CRLF
+        } else if (tokenType.equals(ATSTokenTypes.DATASORT)) {
+            return ATS_TYPE_DECLARATIONS_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DATATYPE)) {
+            return ATS_TYPE_DECLARATIONS_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRARRPSZ)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRBREAK)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRCONTINUE)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRDELAY)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLREFFMASK)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLREFFMASK_ARG)) {
+            return ATS_KEYWORD_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLREXTERN)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLREXTFCALL)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLREXTVAL)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLREXTYPE)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLREXTYPE_STRUCT)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRLST)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRMYFILENAME)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRMYFUNCTION)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRMYLOCATION)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRRAISE)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRREC)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRSHOWTYPE)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRTUP)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DLRVCOPYENV)) {
+            return ATS_FUNCTION_CALL_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DO)) {
+            return ATS_KEYWORD_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DOLLAR)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DOT)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DOTDOT)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DOTDOTDOT)) {
+            return ATS_OPERATION_SIGN_KEYS;
+        } else if (tokenType.equals(ATSTokenTypes.DOTINT)) { // what is it?
+            return ATS_OPERATION_SIGN_KEYS;
+        //
         } else if (tokenType.equals(ATSTokenTypes.IDENTIFIER)) {
             return ATS_IDENTIFIER_KEYS;
         } else {
-            return ATS_LOCAL_VARIABLE_KEYS;
+            return EMPTY_KEYS;
         }
     }
 }

@@ -155,7 +155,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 "begin"                     { return ATSTokenTypes.BEGIN; }
 "case"|"case-"|"case+"|"prcase"
                             { return ATSTokenTypes.CASE; }
-"classdec"                  { return ATSTokenTypes.CLASSDEC; }
+"classdec"                  { return ATSTokenTypes.CLASSDEC; } // CHECK_ME
 "datasort"                  { return ATSTokenTypes.DATASORT; }
 // BB: surprising to me these all generate the same token:
 // (but maybe not exactly, see ./src/pats_lexing_token.dats)
@@ -284,7 +284,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 {INTEGER_LITERAL}           { return ATSTokenTypes.INT; }  // CHECK_ME
 {CHAR_LITERAL}              { return ATSTokenTypes.CHAR; }  // CHECK_ME
 {FLOAT_LITERAL}             { return ATSTokenTypes.FLOAT; }
-//""                          { return ATSTokenTypes.CDATA; }  // FIX_ME
+//?                         { return ATSTokenTypes.CDATA; }  // Unused; for binary data
 {QUOTED_LITERAL}|{DOUBLE_QUOTED_LITERAL}
                             { return ATSTokenTypes.STRING; }  // CHECK_ME
 //
@@ -323,7 +323,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 
 //Not ATS tokens, precisely:
 {WHITE_SPACE}               { return ATSTokenTypes.WHITE_SPACE; }
-{WHITE_SPACE}               { return ATSTokenTypes.WHITE_SPACE; }
+{CRLF}                      { return ATSTokenTypes.CRLF; }
 {IDENTIFIER}                { return ATSTokenTypes.IDENTIFIER; }
 "!"{IDENTIFIER}             { return ATSTokenTypes.VAL_IDENTIFIER; }
 "&"{IDENTIFIER}             { return ATSTokenTypes.REF_IDENTIFIER; }
