@@ -3,6 +3,8 @@ IntelliJATS
 
 An ATS Plugin for IntelliJ IDEA.
 
+![Image of IntelliJATS](http://i.imgur.com/sfqAJcG.png)
+
 ## Important Notes for Development
 
 Before working with this project, you'll want to follow
