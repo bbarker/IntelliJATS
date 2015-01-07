@@ -319,7 +319,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 {TRADITIONAL_COMMENT}       { return ATSTokenTypes.COMMENT_BLOCK; }
 {END_OF_FILE_COMMENT}       { return ATSTokenTypes.COMMENT_REST; }
 {COMMENT}                   { return ATSTokenTypes.COMMENT; }
-// FIX_ME for the next two ("can never be matched")
+//
 "%"                         { return ATSTokenTypes.PERCENT; }
 "?"                         { return ATSTokenTypes.QMARK; }
 
@@ -349,7 +349,6 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 // Match anything not picked up and throw an error:
 //
 [^]         { return ATSTokenTypes.BAD_CHARACTER; }
-""          { return ATSTokenTypes.NONE; } // CHECK_ME
 //
 
 

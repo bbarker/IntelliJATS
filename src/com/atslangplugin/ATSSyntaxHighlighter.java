@@ -42,6 +42,16 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] ATS_BRACES_KEYS =
             new TextAttributesKey[]{ATS_BRACES};
     //
+    public static final TextAttributesKey ATS_BRACKETS =
+            createTextAttributesKey("BRACKETS", BRACKETS);
+    private static final TextAttributesKey[] ATS_BRACKETS_KEYS =
+            new TextAttributesKey[]{ATS_BRACKETS};
+    //
+    public static final TextAttributesKey ATS_DIRECTIVES =
+            createTextAttributesKey("DIRECTIVES", PREDEFINED_SYMBOL);
+    private static final TextAttributesKey[] ATS_DIRECTIVES_KEYS =
+            new TextAttributesKey[]{ATS_DIRECTIVES};
+    //
     public static final TextAttributesKey ATS_FUNCTION_CALL =
             createTextAttributesKey("FUNCTION_CALL", FUNCTION_CALL);
     private static final TextAttributesKey[] ATS_FUNCTION_CALL_KEYS =
@@ -91,6 +101,11 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("TYPE_DECLARATIONS", LABEL);
     private static final TextAttributesKey[] ATS_TYPE_DECLARATIONS_KEYS =
             new TextAttributesKey[]{ATS_TYPE_DECLARATIONS};
+    //
+    public static final TextAttributesKey ATS_VAL_DECLARATIONS =
+            createTextAttributesKey("VAL_DECLARATIONS", CLASS_NAME);
+    private static final TextAttributesKey[] ATS_VAL_DECLARATIONS_KEYS =
+            new TextAttributesKey[]{ATS_VAL_DECLARATIONS};
     //
 
     @NotNull
@@ -172,11 +187,89 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
         tmpMap.put(ATSTokenTypes.FOLDAT, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.FORSTAR, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.FREEAT, ATS_KEYWORD_KEYS);
-
-
-        //
+        tmpMap.put(ATSTokenTypes.FUN, ATS_VAL_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.GT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.GTDOT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.GTLT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.HASH, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.HASHLBRACKETOLON, ATS_BRACKETS_KEYS);
         tmpMap.put(ATSTokenTypes.IDENTIFIER, ATS_IDENTIFIER_KEYS);
-
+        tmpMap.put(ATSTokenTypes.IF, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.IMPLEMENT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.IMPORT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.IN, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.INT, ATS_NUMBER_KEYS);
+        tmpMap.put(ATSTokenTypes.LAM, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.LBRACE, ATS_BRACES_KEYS);
+        tmpMap.put(ATSTokenTypes.LBRACKET, ATS_BRACKETS_KEYS);
+        tmpMap.put(ATSTokenTypes.LET, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.LOCAL, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.LPAREN, ATS_PARENTHESES_KEYS);
+        tmpMap.put(ATSTokenTypes.LT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.MACDEF, ATS_VAL_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.MINUSGT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.MINUSLT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.MINUSLTGT, ATS_KEYWORD_KEYS);
+        // NONE isn't used here
+        tmpMap.put(ATSTokenTypes.NONFIX, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.OF, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.OP, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.OVERLOAD, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.PERCENT, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.PERCENTLPAREN, ATS_PARENTHESES_KEYS);
+        tmpMap.put(ATSTokenTypes.QMARK, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.QUOTELBRACE, ATS_BRACES_KEYS);
+        tmpMap.put(ATSTokenTypes.QUOTELBRACKET, ATS_BRACKETS_KEYS);
+        tmpMap.put(ATSTokenTypes.QUOTELPAREN, ATS_PARENTHESES_KEYS);
+        tmpMap.put(ATSTokenTypes.RBRACE, ATS_BRACES_KEYS);
+        tmpMap.put(ATSTokenTypes.RBRACKET, ATS_BRACES_KEYS);
+        tmpMap.put(ATSTokenTypes.REC, ATS_TYPE_DECLARATIONS_KEYS); // recursive
+        tmpMap.put(ATSTokenTypes.REFAT, ATS_FUNCTION_CALL_KEYS); // CHECK_ME
+        tmpMap.put(ATSTokenTypes.REF_IDENTIFIER, ATS_IDENTIFIER_KEYS);
+        tmpMap.put(ATSTokenTypes.REQUIRE, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.RPAREN, ATS_PARENTHESES_KEYS);
+        tmpMap.put(ATSTokenTypes.SCASE, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.SEMICOLON, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.SIF, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.SORTDEF, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPASSERT, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPDEFINE, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPELIF, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPELIFDEF, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPELIFNDEF, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPELSE, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPENDIF, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPERROR, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPIF, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPIFDEF, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPIFNDEF, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPINCLUDE, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPPRINT, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPTHEN, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPUNDEF, ATS_DIRECTIVES_KEYS);
+        tmpMap.put(ATSTokenTypes.STACST, ATS_VAL_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.STADEF, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.STALOAD, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.STATIC, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.STRING, ATS_STRING_KEYS);
+        tmpMap.put(ATSTokenTypes.SYMELIM, ATS_VAL_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.SYMINTR, ATS_VAL_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.THEN, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.TILDE, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.TKINDEF, ATS_VAL_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.TRY, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.TYPE, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.TYPEDEF, ATS_TYPE_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.VAL, ATS_VAL_DECLARATIONS_KEYS);
+        tmpMap.put(ATSTokenTypes.VAL_IDENTIFIER, ATS_IDENTIFIER_KEYS);
+        tmpMap.put(ATSTokenTypes.VIEWAT, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.WHEN, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.WHERE, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.WHILE, ATS_KEYWORD_KEYS);
+        // do not color WHITESPACE
+        tmpMap.put(ATSTokenTypes.WHILESTAR, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.WITH, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.WITHTYPE, ATS_KEYWORD_KEYS);
 
         tokenColorMap = tmpMap;
     }

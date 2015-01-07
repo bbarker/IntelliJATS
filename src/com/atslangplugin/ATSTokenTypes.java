@@ -120,7 +120,7 @@ public interface ATSTokenTypes {
   IElementType MINUSGT = new ATSTokenType("MINUSGT");
   IElementType MINUSLT = new ATSTokenType("MINUSLT");
   IElementType MINUSLTGT = new ATSTokenType("MINUSLTGT");
-  IElementType NONE = new ATSTokenType("NONE");
+  //IElementType NONE = new ATSTokenType("NONE"); // unused
   IElementType NONFIX = new ATSTokenType("NONFIX");
   IElementType OF = new ATSTokenType("OF");
   IElementType OP = new ATSTokenType("OP");
@@ -140,7 +140,6 @@ public interface ATSTokenTypes {
   IElementType RPAREN = new ATSTokenType("RPAREN");
   IElementType SCASE = new ATSTokenType("SCASE");
   IElementType SEMICOLON = new ATSTokenType("SEMICOLON");
-  IElementType SEPARATOR = new ATSTokenType("SEPARATOR");
   IElementType SIF = new ATSTokenType("SIF");
   IElementType SORTDEF = new ATSTokenType("SORTDEF");
   IElementType SRPASSERT = new ATSTokenType("SRPASSERT");
@@ -173,7 +172,6 @@ public interface ATSTokenTypes {
   IElementType TYPEDEF = new ATSTokenType("TYPEDEF");
   IElementType VAL = new ATSTokenType("VAL");
   IElementType VAL_IDENTIFIER = new ATSTokenType("VAL_IDENTIFIER"); // (CHECK_ME)
-  IElementType VALUE = new ATSTokenType("VALUE");
   IElementType VAR = new ATSTokenType("VAR");
   IElementType VIEWAT = new ATSTokenType("VIEWAT");
   IElementType WHEN = new ATSTokenType("WHEN");
