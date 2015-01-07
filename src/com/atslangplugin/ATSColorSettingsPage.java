@@ -31,6 +31,7 @@ public class ATSColorSettingsPage implements ColorSettingsPage {
             new AttributesDescriptor("Block comments", ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
             new AttributesDescriptor("Braces", ATSSyntaxHighlighter.ATS_BRACES),
             new AttributesDescriptor("Brackets", ATSSyntaxHighlighter.ATS_BRACKETS),
+            new AttributesDescriptor("Commas", ATSSyntaxHighlighter.ATS_COMMA),
             new AttributesDescriptor("Directives", ATSSyntaxHighlighter.ATS_DIRECTIVES),
             new AttributesDescriptor("Identifiers", ATSSyntaxHighlighter.ATS_IDENTIFIER),
             new AttributesDescriptor("Line comments", ATSSyntaxHighlighter.ATS_LINE_COMMENT),
@@ -39,6 +40,7 @@ public class ATSColorSettingsPage implements ColorSettingsPage {
             new AttributesDescriptor("Numbers", ATSSyntaxHighlighter.ATS_NUMBER),
             new AttributesDescriptor("Operators", ATSSyntaxHighlighter.ATS_OPERATION_SIGN),
             new AttributesDescriptor("Parentheses", ATSSyntaxHighlighter.ATS_PARENTHESES),
+            new AttributesDescriptor("Semicolons", ATSSyntaxHighlighter.ATS_SEMICOLON),
             new AttributesDescriptor("Strings", ATSSyntaxHighlighter.ATS_STRING),
             new AttributesDescriptor("Type declarations", ATSSyntaxHighlighter.ATS_TYPE_DECLARATIONS),
             new AttributesDescriptor("Val, Fun declarations", ATSSyntaxHighlighter.ATS_VAL_DECLARATIONS)

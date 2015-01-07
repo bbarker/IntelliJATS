@@ -1,18 +1,12 @@
 package com.atslangplugin;
 
-import com.atslangplugin.psi.ATSTokenType;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.editor.HighlighterColors;
-import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +40,11 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
             createTextAttributesKey("BRACKETS", BRACKETS);
     private static final TextAttributesKey[] ATS_BRACKETS_KEYS =
             new TextAttributesKey[]{ATS_BRACKETS};
+    //
+    public static final TextAttributesKey ATS_COMMA =
+            createTextAttributesKey("COMMA", COMMA);
+    private static final TextAttributesKey[] ATS_COMMA_KEYS =
+            new TextAttributesKey[]{ATS_COMMA};
     //
     public static final TextAttributesKey ATS_DIRECTIVES =
             createTextAttributesKey("DIRECTIVES", PREDEFINED_SYMBOL);
@@ -92,18 +91,23 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final TextAttributesKey[] ATS_PARENTHESES_KEYS =
             new TextAttributesKey[]{ATS_PARENTHESES};
     //
+    public static final TextAttributesKey ATS_SEMICOLON =
+            createTextAttributesKey("SEMICOLON", SEMICOLON);
+    private static final TextAttributesKey[] ATS_SEMICOLON_KEYS =
+            new TextAttributesKey[]{ATS_SEMICOLON};
+    //
     public static final TextAttributesKey ATS_STRING =
             createTextAttributesKey("STRING", STRING);
     private static final TextAttributesKey[] ATS_STRING_KEYS =
             new TextAttributesKey[]{ATS_STRING};
     //
     public static final TextAttributesKey ATS_TYPE_DECLARATIONS =
-            createTextAttributesKey("TYPE_DECLARATIONS", LABEL);
+            createTextAttributesKey("TYPE_DECLARATIONS", FUNCTION_DECLARATION);
     private static final TextAttributesKey[] ATS_TYPE_DECLARATIONS_KEYS =
             new TextAttributesKey[]{ATS_TYPE_DECLARATIONS};
     //
     public static final TextAttributesKey ATS_VAL_DECLARATIONS =
-            createTextAttributesKey("VAL_DECLARATIONS", CLASS_NAME);
+            createTextAttributesKey("VAL_DECLARATIONS", INSTANCE_FIELD);
     private static final TextAttributesKey[] ATS_VAL_DECLARATIONS_KEYS =
             new TextAttributesKey[]{ATS_VAL_DECLARATIONS};
     //
@@ -131,8 +135,8 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
         tmpMap.put(ATSTokenTypes.CLASSDEC, ATS_TYPE_DECLARATIONS_KEYS);
         tmpMap.put(ATSTokenTypes.COLON, ATS_OPERATION_SIGN_KEYS);
         tmpMap.put(ATSTokenTypes.COLONLT, ATS_OPERATION_SIGN_KEYS);
-        tmpMap.put(ATSTokenTypes.COMMA, ATS_OPERATION_SIGN_KEYS);
-        tmpMap.put(ATSTokenTypes.COMMALPAREN, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.COMMA, ATS_COMMA_KEYS);
+        tmpMap.put(ATSTokenTypes.COMMALPAREN, ATS_PARENTHESES_KEYS);
         tmpMap.put(ATSTokenTypes.COMMENT_BLOCK, ATS_BLOCK_COMMENT_KEYS);
         tmpMap.put(ATSTokenTypes.COMMENT_LINE, ATS_LINE_COMMENT_KEYS);
         tmpMap.put(ATSTokenTypes.COMMENT_REST, ATS_BLOCK_COMMENT_KEYS);
@@ -229,7 +233,7 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
         tmpMap.put(ATSTokenTypes.REQUIRE, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.RPAREN, ATS_PARENTHESES_KEYS);
         tmpMap.put(ATSTokenTypes.SCASE, ATS_KEYWORD_KEYS);
-        tmpMap.put(ATSTokenTypes.SEMICOLON, ATS_OPERATION_SIGN_KEYS);
+        tmpMap.put(ATSTokenTypes.SEMICOLON, ATS_SEMICOLON_KEYS);
         tmpMap.put(ATSTokenTypes.SIF, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.SORTDEF, ATS_TYPE_DECLARATIONS_KEYS);
         tmpMap.put(ATSTokenTypes.SRPASSERT, ATS_DIRECTIVES_KEYS);
