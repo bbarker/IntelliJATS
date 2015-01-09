@@ -6,7 +6,7 @@ An ATS Plugin for IntelliJ IDEA.
 ![Image of IntelliJATS](http://i.imgur.com/sfqAJcG.png)
 
 ## Current Features
-* Complete lexer based on the ATS2 lexer definition
+* Complete JFlex lexer based on the ATS2 lexer definition
 * Customizable syntax highlighting
 * An icon for the various ATS files
 
