@@ -26,7 +26,7 @@ public class ATSFileTypeInclude extends LanguageFileType {
     @NotNull
     @Override
     public String getDescription() {
-        return "Included (\"header\") Applied Template System (ATS) language file";
+        return "Included (\"header\") Applied Type System (ATS) language file";
     }
 
     @NotNull

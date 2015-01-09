@@ -26,7 +26,7 @@ public class ATSFileTypeStatic extends LanguageFileType {
     @NotNull
     @Override
     public String getDescription() {
-        return "Static Applied Template System (ATS) language file";
+        return "Static Applied Type System (ATS) language file";
     }
 
     @NotNull

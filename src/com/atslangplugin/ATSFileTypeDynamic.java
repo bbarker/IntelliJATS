@@ -26,7 +26,7 @@ public class ATSFileTypeDynamic extends LanguageFileType {
     @NotNull
     @Override
     public String getDescription() {
-        return "Dynamic Applied Template System (ATS) language file";
+        return "Dynamic Applied Type System (ATS) language file";
     }
 
     @NotNull
