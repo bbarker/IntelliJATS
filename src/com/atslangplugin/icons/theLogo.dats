@@ -27,7 +27,9 @@ fun draw_ats (ctx: !xr1): void
 extern
 fun draw_lambda (ctx: !xr1): void
 extern
-fun draw_d (ctx: !xr1): void
+fun draw_D (ctx: !xr1): void
+extern
+fun draw_S (ctx: !xr1): void
 //
 (* ****** ****** *)
 
@@ -90,24 +92,45 @@ val () = cairo_line_to (ctx, 0.00+1.0/18, 2.00+1.0/12.5)
 (* ****** ****** *)
 
 implement
-draw_d (ctx) =
+draw_D (ctx) =
 {
 //
-val A0 = (0.1, 0.0)
-val B0 = (0.1 , 2.0)
-val B1 = (1.25, 0.35)
-val B2 = (1.25, 1.75)
+val A0 = (0.20, 0.0)
+val B0 = (0.20, 2.0)
+val B1 = (1.35, 0.35)
+val B2 = (1.35, 1.75)
 //
 val () = cairo_move_to (ctx, A0.0, A0.1)
 val () = cairo_line_to (ctx, B0.0, B0.1)
 //
-val cc = 0.15
+val cc = 0.115
 val () = cairo_move_to (ctx, A0.0+cc/2.1, A0.1+cc)
 val () = cairo_curve_to (ctx, B1.0, B1.1, B2.0, B2.1, B0.0+cc/2.1, B0.1-cc)
 
-} (* end of [draw_d] *)
+} (* end of [draw_D] *)
 
 (* ****** ****** *)
+
+implement
+draw_S (ctx) =
+{
+//
+val vs = 1.7
+val vi = 0.30
+val A0 = (1.25, 0.0)
+val B0 = (0.10 - vs, 2.0/3.0 - vi)
+val B1 = (1.25 + vs, 4.0/3.0 + vi)
+val B2 = (0.10, 2.0)
+//
+val () = cairo_move_to (ctx, A0.0, A0.1)
+
+// consider multiple Bezier curves instead of just one:
+val () = cairo_curve_to (ctx, B0.0, B0.1, B1.0, B1.1, B2.0, B2.1)
+
+} (* end of [draw_S] *)
+
+(* ****** ****** *)
+
 
 implement
 main () = (0) where {
@@ -133,10 +156,12 @@ val ((*void*)) =
   cairo_scale (ctx, 100.0, 100.0)
 //
 //val ((*void*)) = draw_lambda (ctx)
-val ((*void*)) = draw_d (ctx)
+//val ((*void*)) = draw_D (ctx)
+val ((*void*)) = draw_S (ctx)
+
 val () =
   cairo_set_source_rgb (ctx, 1.0, 0.0, 0.0)
-val ((*void*)) = cairo_set_line_width (ctx, 0.32)
+val ((*void*)) = cairo_set_line_width (ctx, 0.24)
 val ((*void*)) = cairo_stroke (ctx)
 //
 val ((*void*)) = cairo_restore (pf | ctx)
@@ -149,7 +174,7 @@ val ((*void*)) =
 val ((*void*)) = draw_ats (ctx)
 val () =
   cairo_set_source_rgb (ctx, 0.0, 0.0, 1.0)
-val ((*void*)) = cairo_set_line_width (ctx, 0.32)
+val ((*void*)) = cairo_set_line_width (ctx, 0.16)
 val ((*void*)) = cairo_stroke (ctx)
 //
 val ((*void*)) = cairo_restore (pf | ctx)

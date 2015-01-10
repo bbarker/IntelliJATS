@@ -27,6 +27,7 @@ out/*
 .gradle/*
 *.so
 
+theLogo
 theLogo.png
 
 ###### end of [.gitignore] ######
