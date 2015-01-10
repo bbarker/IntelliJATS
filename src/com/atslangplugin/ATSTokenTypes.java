@@ -66,6 +66,7 @@ public interface ATSTokenTypes {
   IElementType DLRREC = new ATSTokenType("DLRREC");
   IElementType DLRSHOWTYPE = new ATSTokenType("DLRSHOWTYPE");
   IElementType DLRTUP = new ATSTokenType("DLRTUP");
+  IElementType DLRTEMPENVER = new ATSTokenType("DLRTEMPENVER");
   IElementType DLRVCOPYENV = new ATSTokenType("DLRVCOPYENV");
   IElementType DO = new ATSTokenType("DO");
   IElementType DOLLAR = new ATSTokenType("DOLLAR");

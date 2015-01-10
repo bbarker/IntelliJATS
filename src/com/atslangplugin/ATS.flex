@@ -262,6 +262,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 //
 "$vcopyenv_v"|"$vcopyenv_vt(vt)"
                             { return ATSTokenTypes.DLRVCOPYENV; }
+"$tempenver"                { return ATSTokenTypes.DLRTEMPENVER; }
 //
 "#assert"                   { return ATSTokenTypes.SRPASSERT; }
 "#define"                   { return ATSTokenTypes.SRPDEFINE; }

@@ -161,6 +161,7 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
         tmpMap.put(ATSTokenTypes.DLRREC, ATS_FUNCTION_CALL_KEYS);
         tmpMap.put(ATSTokenTypes.DLRSHOWTYPE, ATS_FUNCTION_CALL_KEYS);
         tmpMap.put(ATSTokenTypes.DLRTUP, ATS_FUNCTION_CALL_KEYS);
+        tmpMap.put(ATSTokenTypes.DLRTEMPENVER, ATS_FUNCTION_CALL_KEYS);
         tmpMap.put(ATSTokenTypes.DLRVCOPYENV, ATS_FUNCTION_CALL_KEYS);
         tmpMap.put(ATSTokenTypes.DO, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.DOLLAR, ATS_OPERATION_SIGN_KEYS);
