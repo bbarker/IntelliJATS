@@ -27,6 +27,6 @@ out/*
 .gradle/*
 *.so
 
-###### end of [.gitignore] ######
+theLogo.png
 
-src/com/atslangplugin/ATS.bnf
+###### end of [.gitignore] ######
