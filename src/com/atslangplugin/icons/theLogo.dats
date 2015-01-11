@@ -37,6 +37,16 @@ fun draw_C (ctx: !xr1): void
 //
 (* ****** ****** *)
 
+// Write a draw Icon Function that
+// takes a list or array of other functions
+// and calls each of them.
+
+extern
+fun draw_ats_and_other(
+  fname: String,
+  draw_fun: (!xr1) -<fun1> void
+):<1> void
+
 implement
 draw_ats (ctx) =
 {
@@ -178,9 +188,9 @@ val () = cairo_curve_to (ctx, s*TL.0, s*TL.1, s*BL.0, s*BL.1, s*BR.0, s* BR.1)
 
 (* ****** ****** *)
 
-
 implement
-main () = (0) where {
+draw_ats_and_other (fname, draw_fun) =
+{
 //
 val sf =
 cairo_image_surface_create
@@ -202,9 +212,7 @@ val (pf | ()) = cairo_save (ctx)
 val ((*void*)) =
   cairo_scale (ctx, 100.0, 100.0)
 //
-//val ((*void*)) = draw_lambda (ctx)
-//val ((*void*)) = draw_D (ctx)
-val ((*void*)) = draw_C (ctx)
+val ((*void*)) = draw_fun (ctx)
 
 val () =
   cairo_set_source_rgb (ctx, 1.0, 0.0, 0.0)
@@ -227,7 +235,7 @@ val ((*void*)) = cairo_stroke (ctx)
 val ((*void*)) = cairo_restore (pf | ctx)
 //
 val status =
-  cairo_surface_write_to_png (sf, "theLogo.png")
+  cairo_surface_write_to_png (sf, fname)
 val () = cairo_destroy (ctx)
 val () = cairo_surface_destroy (sf)
 //
@@ -236,12 +244,22 @@ val () =
 if (
 status = CAIRO_STATUS_SUCCESS
 ) then (
-  println! "The image is written to the file [theLogo.png]."
+  println! ("The image is written to the file [", fname, "].")
 ) else (
   println! "exit(ATS): [cairo_surface_write_to_png] failed";
 ) (* end of [if] *)
 ) : void // end of [val]
 //
+} (* end of [draw_ats_and_other] *)
+
+implement
+main () = (0) where {
+
+val () = draw_ats_and_other("dats_icon.png", draw_D)
+val () = draw_ats_and_other("sats_icon.png", draw_S)
+val () = draw_ats_and_other("hats_icon.png", draw_H)
+val () = draw_ats_and_other("cats_icon.png", draw_C)
+
 } (* end of [main] *)
 
 (* ****** ****** *)
