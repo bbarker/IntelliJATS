@@ -160,6 +160,24 @@ val () = cairo_line_to (ctx, MR.0, MR.1)
 
 (* ****** ****** *)
 
+implement
+draw_C (ctx) =
+{
+val s = 0.8
+val xt = 0.2
+//
+val TL = (~0.25 + xt, ~0.25)
+val BL = (~0.25 + xt, 2.5)
+val TR = (2.0 + xt, ~0.25)
+val BR = (2.0 + xt, 2.5)
+//
+val () = cairo_move_to (ctx, s*TR.0, s*TR.1)
+val () = cairo_curve_to (ctx, s*TL.0, s*TL.1, s*BL.0, s*BL.1, s*BR.0, s* BR.1)
+
+} (* end of [draw_C] *)
+
+(* ****** ****** *)
+
 
 implement
 main () = (0) where {
@@ -186,7 +204,7 @@ val ((*void*)) =
 //
 //val ((*void*)) = draw_lambda (ctx)
 //val ((*void*)) = draw_D (ctx)
-val ((*void*)) = draw_H (ctx)
+val ((*void*)) = draw_C (ctx)
 
 val () =
   cairo_set_source_rgb (ctx, 1.0, 0.0, 0.0)
