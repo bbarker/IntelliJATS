@@ -30,6 +30,10 @@ extern
 fun draw_D (ctx: !xr1): void
 extern
 fun draw_S (ctx: !xr1): void
+extern
+fun draw_H (ctx: !xr1): void
+extern
+fun draw_C (ctx: !xr1): void
 //
 (* ****** ****** *)
 
@@ -131,6 +135,31 @@ val () = cairo_curve_to (ctx, B0.0, B0.1, B1.0, B1.1, B2.0, B2.1)
 
 (* ****** ****** *)
 
+implement
+draw_H (ctx) =
+{
+//
+
+val TL = (0.20, 0.0)
+val BL = (0.20, 2.0)
+val TR = (1.15, 0.0)
+val BR = (1.15, 2.0)
+val ML = ((TL.0 + BL.0)/2.0, (TL.1 + BL.1)/2.0)
+val MR = ((TR.0 + BR.0)/2.0, (TR.1 + BR.1)/2.0)
+//
+val () = cairo_move_to (ctx, TL.0, TL.1)
+val () = cairo_line_to (ctx, BL.0, BL.1)
+//
+val () = cairo_move_to (ctx, TR.0, TR.1)
+val () = cairo_line_to (ctx, BR.0, BR.1)
+//
+val () = cairo_move_to (ctx, ML.0, ML.1)
+val () = cairo_line_to (ctx, MR.0, MR.1)
+
+} (* end of [draw_H] *)
+
+(* ****** ****** *)
+
 
 implement
 main () = (0) where {
@@ -157,7 +186,7 @@ val ((*void*)) =
 //
 //val ((*void*)) = draw_lambda (ctx)
 //val ((*void*)) = draw_D (ctx)
-val ((*void*)) = draw_S (ctx)
+val ((*void*)) = draw_H (ctx)
 
 val () =
   cairo_set_source_rgb (ctx, 1.0, 0.0, 0.0)
