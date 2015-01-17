@@ -8,6 +8,7 @@ An ATS Plugin for IntelliJ IDEA.
 ## Current Features
 * Complete JFlex lexer based on the ATS2 lexer definition
 * Customizable syntax highlighting
+* Building ATS programs (indirectly; use a [makefile wrapper](https://gist.github.com/bbarker/c73ecf257bca966c1efd))
 * An icon for the various ATS files
 
 ## Important Notes for Development
