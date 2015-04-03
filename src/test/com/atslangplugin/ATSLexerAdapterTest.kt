@@ -14,6 +14,7 @@ import java.nio.file.Paths
 
 import com.atslangplugin.ATSLexerAdapter
 import com.atslangplugin.Utils.*
+import kotlin.properties.Delegates
 
 /**
  * ATSLexerAdapter Tester.
@@ -30,7 +31,7 @@ public class ATSLexerAdapterTest {
     //
     var twoLineATS_seq = "/" + "/" + "This is a comment\n" + "val x:int =5"
 
-    var settingsPageDemo = getFileAsString<ATSLexerAdapterTest>("/test/Resources/list_vt_quicksort.dats")
+    var settingsPageDemo = getFileAsString<ATSLexerAdapterTest>(list_vt_quicksort_Path)
 
     var coroutine_seq = ""
 
@@ -94,10 +95,9 @@ public class ATSLexerAdapterTest {
 
     companion object {
 
-        val coroutinePath: String = "/Resources/Coroutine/DATS/coroutine.dats"
+        val coroutinePath: String = "test/Resources/Coroutine/DATS/coroutine.dats"
 
-        val list_vt_quicksort_Path: String = "/test/Resources/list_vt_quicksort.dats"
-        //val list_vt_quicksort_Path = "/com/resources/list_vt_quicksort.dats"
+        val list_vt_quicksort_Path: String = "test/Resources/list_vt_quicksort.dats"
 
     }
 

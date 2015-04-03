@@ -4,9 +4,7 @@ import com.atslangplugin.ATSLexer
 import com.atslangplugin.ATSLexerAdapter
 import com.atslangplugin.ATSTokenTypes
 import com.intellij.psi.tree.IElementType
-import java.io.File
-import java.io.IOException
-import java.io.InputStreamReader
+import java.io.*
 import java.net.URLEncoder
 import java.nio.charset.Charset
 import java.nio.file.Files
@@ -29,7 +27,7 @@ fun scanFile(myLexerAdapter: ATSLexerAdapter?, charSeqATS: CharSequence) {
     val tokenStr: String
     var tokenCount = 0
     do {
-        token = myLexerAdapter.getTokenType()
+        token = myLexerAdapter.getTokenType() ?: ATSTokenTypes.EOF
         tokenCount++
         tokenStr = token.toString()
         val yyline = myLexerAdapter.getYyline()
@@ -40,11 +38,10 @@ fun scanFile(myLexerAdapter: ATSLexerAdapter?, charSeqATS: CharSequence) {
 }
 
 inline fun getFileAsString<reified T>(relPath: String): String {
-    val fileStream = javaClass<T>().getClassLoader().getResourceAsStream(relPath)
-    val fileReader: InputStreamReader? = fileStream.reader()
-    val path: String? = javaClass<T>().getClassLoader().getResource(relPath)?.getPath()
-    println(path ?: "File not found!" )
-    return fileReader?.readText() ?: "// error: file not found or null"
+    val fileStream: InputStream? = javaClass<T>().getClassLoader().getResourceAsStream(relPath)
+    val fileReader: InputStreamReader? = fileStream?.reader()
+            ?: ByteArrayInputStream(("//Bad file!").toByteArray("UTF8")).reader()
+    return fileReader?.readText() ?: "//Bad file or null"
 }
 
 throws(javaClass<IOException>())
